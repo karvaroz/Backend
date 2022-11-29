@@ -171,4 +171,13 @@ let br = {
 }
 
 let is: 3 = 3 // Literal de 3
-is = 4
+// is = 4
+
+let j = [1, 2, 3]
+j.push(5)
+// j.push("6")
+
+// let k: never = 4
+
+let l: unknown = 4
+let m = 1 * 2
