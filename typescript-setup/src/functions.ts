@@ -102,17 +102,17 @@ z.a() // retorna this una funcion
 
 // console.log(createNumbers())
 
-function * generatorFib (): IterableIterator<number> {
-  let x = 0
-  let y = 1
-  while (true) {
-    yield x;
-    [x, y] = [y, x + y]
-  }
-}
+// function * generatorFib (): IterableIterator<number> {
+//   let x = 0
+//   let y = 1
+//   while (true) {
+//     yield x;
+//     [x, y] = [y, x + y]
+//   }
+// }
 
-const fibonacci = generatorFib()
-console.log(fibonacci.next().value)
+// const fibonacci = generatorFib()
+// console.log(fibonacci.next().value)
 
 // Los generadores producen una secuencia de valores
 // Los iteracion nos ayudan a consumir estos valores
@@ -124,6 +124,7 @@ const number = {
     }
   }
 }
+console.log(number)
 
 // for (let a of number) {
 // }
@@ -139,9 +140,9 @@ const number = {
 // type Log = (message: string, userId?: string) => void
 
 // overloaded o sobre carga en funciones
-class Reservation {
-  constructor () {}
-}
+// class Reservation {
+//   constructor () {}
+// }
 // type Reverse = {
 //   (from: Date, to: Date, destination: string): Reservation
 // }
