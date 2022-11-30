@@ -152,10 +152,25 @@ console.log(number)
 // }
 
 // Sobre carga
+// Permite declarar una funcion puede tener varios tipos de parámetros diferentes
 // type Reverse = {
 //   (from: Date, to: Date, destination: string): Reservation
 //   (from: Date, destination: string): Reservation
 // }
+
+// let reserve: Reserve = (from: Date, toOrDestination: Date | string, destination?: string
+// ) => {
+// return new Reservation();
+// };
+
+// class Reservation {
+//   constructor () {}
+// }
+
+// type Reserve = {
+//  (from: Date, to: Date, destimation: string): Reservation;
+//  (from: Date, destimation: string): Reservation;
+// };
 
 // let reserve: Reserve = (
 // from: Date,
@@ -164,3 +179,5 @@ console.log(number)
 // ) => {
 // return new Reservation();
 // };
+
+// UNIT TEST

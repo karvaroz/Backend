@@ -128,28 +128,68 @@ app.get("/", (req: any, res: any) => {
 
 // getSalary.call(queue)
 
-function* generatorFib(): IterableIterator<number> {
-	let n1 = 0;
-	let n2 = 1;
-	while (true) {
-		yield n1;
-		let n3 = n1 + n2;
-		n1 = n2;
-		n2 = n3;
-		// [n1, n2] = [n2, n1 + n2]; asignando de n1 = n2 y n2 = n1 + n2
+// function* generatorFib(): IterableIterator<number> {
+// 	let n1 = 0;
+// 	let n2 = 1;
+// 	while (true) {
+// 		yield n1;
+// 		let n3 = n1 + n2;
+// 		n1 = n2;
+// 		n2 = n3;
+// 		// [n1, n2] = [n2, n1 + n2]; asignando de n1 = n2 y n2 = n1 + n2
+// 	}
+// }
+
+// const fibonacci = generatorFib();
+
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+// console.log(fibonacci.next().value);
+
+class Reservation {
+	public to: Date;
+	public destination: string;
+
+	constructor(private from: Date) {}
+
+	setTo(date: Date) {
+		this.to = date;
+	}
+
+	setDestinantion(destination: string) {
+		this.destination = destination;
 	}
 }
 
-const fibonacci = generatorFib();
+type Reserve = {
+	(from: Date, to: Date, destination: string): Reservation;
+	(from: Date, destination: string): Reservation;
+};
 
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
-console.log(fibonacci.next().value);
+const reserve: Reserve = (
+	from: Date,
+	toOrDestination: Date | string,
+	destination?: string
+) => {
+	const reservation = new Reservation(from);
+
+if (toOrDestination instanceof Date && destination) {
+	reservation.setTo(toOrDestination);
+	reservation.setDestinantion(destination);
+} else if (toOrDestination) {
+	reservation.setDestinantion(toOrDestination);
+} 
+
+	return reservation;
+};
+
+console.log(reserve(new Date(), new Date(), "HERO"));
+console.log(reserve(new Date(), "HERO"));

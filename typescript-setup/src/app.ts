@@ -181,3 +181,5 @@ j.push(5)
 
 let l: unknown = 4
 let m = 1 * 2
+// script tsc = "tsc"
+// npm run tsc -- --init
