@@ -1,10 +1,18 @@
 import Piece from "./piece";
-import position from "./position";
+import Position from "./position";
 
 export default class Queen extends Piece {
-	canMoveTo(position: position): boolean {
+	canMoveTo(position: Position): boolean {
 		let distance = this.position.getPiecePosition(position);
-		// Solo se puede mover dos espacios vertical y horizontal
-		return distance.rank < 2 && distance.file < 2;
+		if (
+			position.getPiecePosition(position).file == distance.file ||
+			position.getPiecePosition(position).rank == distance.rank ||
+			Math.abs(position.getPiecePosition(position).file - distance.file) ==
+				Math.abs(position.getPiecePosition(position).rank - distance.rank)
+		) {
+			return true;
+		}
+
+		return false
 	}
 }

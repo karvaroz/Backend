@@ -1,9 +1,16 @@
 import Piece from "./piece";
-import position from "./position";
+import Position from "./position";
 
 export default class Bishop extends Piece {
-	canMoveTo(position: position): boolean {
+	canMoveTo(position: Position): boolean {
 		let distance = this.position.getPiecePosition(position);
+		if (
+			distance.file == position.getPiecePosition(position).file &&
+			distance.rank == position.getPiecePosition(position).rank
+		) {
+			return false;
+		}
+
 		return distance.rank < 2 && distance.file < 2;
 	}
 }
