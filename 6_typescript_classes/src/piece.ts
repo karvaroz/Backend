@@ -3,6 +3,7 @@ import { Color, File, Rank } from "./types";
 
 export default abstract class Piece {
 	protected position: Position;
+	// Cada pieza tiene un color u una position inicial
 	constructor(
 		private readonly color: Color,
 		private file: File,
@@ -22,3 +23,10 @@ export default abstract class Piece {
 // Metodo abstract no tiene implementacion
 // Las hijas son las que creen la instancia
 // Todas las piezas hijas podrán moverse
+
+// public
+// Se puede acceder desde cualquier parte
+// protected
+// Accesible dentro de la clase y sus subclases
+// private
+// Accessible desde la clase solamente
