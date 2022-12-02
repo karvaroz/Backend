@@ -15,3 +15,4 @@ app.listen(port, () => {
 // Clases abstracta
 // Los metodos puedenser private, protected, public
 // super hace referencia a una clase padre
+
