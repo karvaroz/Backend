@@ -6,17 +6,17 @@ describe("Test queen", () => {
     
 	it("should move vertically", () => {
 		let position = new Position("D", 8);
-		expect(queen.canMoveTo(position)).toBe(true); // No paso la prueba
+		expect(queen.canMoveTo(position)).toBe(true);
     });
     
 	it("should move horizontally", () => {
 		let position = new Position("A", 1);
-		expect(queen.canMoveTo(position)).toBe(true); // No paso la prueba
+		expect(queen.canMoveTo(position)).toBe(true);
 	});
     
 	it("should move diagonally", () => {
 		let position = new Position("H", 5);
-		expect(queen.canMoveTo(position)).toBe(true); // No paso la prueba
+		expect(queen.canMoveTo(position)).toBe(true);
 
 		position = new Position("A", 4);
 		expect(queen.canMoveTo(position)).toBe(true);
