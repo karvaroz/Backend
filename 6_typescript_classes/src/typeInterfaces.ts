@@ -38,3 +38,23 @@ interface Sushi extends Food {
 interface Cake extends Food {
 	sweet: boolean;
 }
+
+// Diferencias
+// Las interfaces es dificil la union de tipos
+interface AB {
+	good(x: number): string;
+	bad(x: number): string;
+}
+// La herencia de las interfaces no se puede hacer cambios en los metodos
+// Verifica que sea asignable
+// interface BA extends AB {
+// 	good(x: number): string;
+// 	bad(x: string): string;
+// }
+
+// implements y extends?
+// Extends cuando se tiene dos cosas y vas a heredar todo a su hijo
+// Implments - implementa los metodos
+// diferencia entre interface y una clase abstracta?
+// No se puede hacer herencia multiple con cosas abstractas
+// default methos en TS?
