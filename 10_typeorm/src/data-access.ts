@@ -9,20 +9,16 @@ export default class PhotoDataAccess {
 
 	async read(id: number) {
 		const repository = AppDataSource.getRepository(Photo);
-		return await repository.findOneBy({
-			id: id,
-		});
+		return await repository.findOneBy({ id });
 	}
 
 	async update(photo: Photo) {
 		const repository = AppDataSource.getRepository(Photo);
-		return await repository.save(photo);
+		await repository.save(photo);
 	}
 
 	async delete(id: number) {
 		const repository = AppDataSource.getRepository(Photo);
-		return await repository.delete({
-			id: id,
-		});
+		return await repository.delete({ id });
 	}
 }
