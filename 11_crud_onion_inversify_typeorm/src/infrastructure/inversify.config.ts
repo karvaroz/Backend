@@ -1,10 +1,9 @@
 import { Container } from 'inversify'
-import { TYPES } from './types'
-import { UserEntity } from '../entities/user-entity'
-import { IUser } from '../interfaces/interfaces'
 
-const myContainer = new Container()
+import { USER } from './types'
 
-myContainer.bind<IUser>(TYPES.User).to(UserEntity)
+import UserEntity from '../domain/user.entity'
 
-export { myContainer }
+export const container = new Container()
+
+container.bind(USER).to(UserEntity)

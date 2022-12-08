@@ -1,3 +1,1 @@
-export const TYPES = {
-  User: Symbol.for('User')
-}
+export const USER = Symbol('USER')

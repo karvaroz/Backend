@@ -1,32 +1,32 @@
-import { injectable } from 'inversify'
-import { DeleteResult } from 'typeorm'
-import { AppDataSource } from '../database/db-source'
-import { UserEntity } from '../entities/user-entity'
+import { UserRepository } from '../domain/user.repository'
+import { inject } from 'inversify'
+import { USER } from '../infrastructure/types'
+import UserEntity from '../domain/user.entity'
 
-@injectable()
-export default class UserService<UserEntity> {
-  async readAllUsers (): Promise<UserEntity[]> {
-    const repository = AppDataSource.getRepository(UserEntity)
-    return await repository.find()
+export class UserService {
+  private userRepository: UserRepository
+
+  constructor (@inject(USER) userRepository: UserRepository) {
+    this.userRepository = userRepository
   }
 
-  async readUserById (id: number) {
-    const repository = AppDataSource.getRepository(UserEntity)
-    return await repository.findOneBy({ id });
+  async readAll (): Promise<UserEntity[] | null> {
+    return await this.userRepository.readAll()
   }
 
-  async createNewUser (user: UserEntity) {
-    const repository = AppDataSource.getRepository(UserEntity)
-    return await repository.save(user)
+  async readById (id: number): Promise<UserEntity | null> {
+    return await this.userRepository.readById(id)
   }
 
-  async deleteUser (id: number): Promise<DeleteResult> {
-    const repository = AppDataSource.getRepository(UserEntity)
-    return await repository.delete(id)
+  async createUser (user: UserEntity): Promise<UserEntity | null> {
+    return await this.userRepository.createUser(user)
   }
 
-  async udpdateUser (user: UserEntity) {
-    const repository = AppDataSource.getRepository(UserEntity)
-    return await repository.save(user)
+  async updateUser (user: UserEntity): Promise<UserEntity | null> {
+    return await this.userRepository.updateUser(user)
+  }
+
+  async deleteUser (id: number): Promise<void> {
+    return this.userRepository.deleteUser(id)
   }
 }
