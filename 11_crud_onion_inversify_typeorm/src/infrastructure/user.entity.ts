@@ -1,7 +1,8 @@
 import { Column, PrimaryColumn, Entity } from 'typeorm'
+import { User } from '../domain/user.domain'
 
 @Entity()
-export default class UserEntity {
+export default class UserEntity implements User {
   @PrimaryColumn()
     id!: number
 
