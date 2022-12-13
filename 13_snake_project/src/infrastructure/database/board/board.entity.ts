@@ -13,6 +13,6 @@ export default class BoardEntity implements Board {
 	@Column()
 	col_count!: number;
 
-	@Column()
-	cells!: Cell[][];
+	// @Column()
+	// cells!: Cell[][];
 }
