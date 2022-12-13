@@ -1,7 +1,9 @@
+import { Cell } from "./cell.domain"
+
 export class Snake {
-    lives!: number
-    score!: number
-    length!: number
-    posX!: number
-    posY!: number
+	id!: number;
+	length!: number;
+	posX!: number;
+	posY!: number;
+	head!: Cell;
 }
