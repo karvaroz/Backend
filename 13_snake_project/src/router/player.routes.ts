@@ -7,6 +7,14 @@ export class PlayerRouter extends BaseRouter<PlayerController> {
 	}
 
 	routes(): void {
-		this.router.get("/player", (req, res) => "");
+		this.router.post("/player/create", (req, res) =>
+			this.controller.createPlayer(req, res)
+		);
+		this.router.get("/player/:id", (req, res) =>
+			this.controller.getPlayerById(req, res)
+		);
+		this.router.put("/player/update/:id", (req, res) =>
+			this.controller.updatePlayer(req, res)
+		);
 	}
 }

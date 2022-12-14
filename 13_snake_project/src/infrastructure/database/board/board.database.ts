@@ -5,7 +5,6 @@ import BoardEntity from "./board.entity";
 
 @injectable()
 export default class BoardDatabase implements BoardRepository {
-
 	async createBoard(board: BoardEntity) {
 		const repository = AppDataSource.getRepository(BoardEntity);
 		return await repository.save(board);
@@ -15,7 +14,7 @@ export default class BoardDatabase implements BoardRepository {
 		const repository = AppDataSource.getRepository(BoardEntity);
 		return await repository.findOneBy({ id });
 	}
-	
+
 	async modifyBoard(board: BoardEntity) {
 		const repository = AppDataSource.getRepository(BoardEntity);
 		return await repository.save(board);

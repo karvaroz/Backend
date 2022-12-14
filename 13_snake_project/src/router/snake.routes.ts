@@ -7,6 +7,26 @@ export class SnakeRouter extends BaseRouter<SnakeController> {
 	}
 
 	routes(): void {
-		this.router.get("/snake", (req, res) => this.controller.getSnake(req, res));
+		this.router.get("/snake/position/:id", (req, res) =>
+			this.controller.initialPosition(req, res)
+		);
+		this.router.post("snake/create", (req, res) =>
+			this.controller.createSnake(req, res)
+		);
+		this.router.post("snake/move", (req, res) =>
+			this.controller.moveSnake(req, res)
+		);
+		this.router.get("/snake/:id", (req, res) =>
+			this.controller.getSnakeById(req, res)
+		);
+		this.router.put("snake/update/:id", (req, res) =>
+			this.controller.updateSnake(req, res)
+		);
+		this.router.post("snake/grow", (req, res) =>
+			this.controller.growSnake(req, res)
+		);
+		this.router.post("snake/die", (req, res) =>
+			this.controller.dieSnake(req, res)
+		);
 	}
 }
