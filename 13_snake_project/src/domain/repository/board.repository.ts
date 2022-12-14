@@ -1,6 +1,7 @@
-import { Board } from "../entities/board.domain";
+import BoardEntity from "../../infrastructure/database/board/board.entity";
 
 export interface BoardRepository {
-	createBoard(board: Board): void;
-	createFood: void;
+	createBoard(board: BoardEntity): Promise<BoardEntity>;
+	getBoardById(id: number): Promise<BoardEntity | null>;
+	modifyBoard(board: BoardEntity): Promise<BoardEntity>;
 }

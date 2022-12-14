@@ -1,5 +1,6 @@
 import User from "./user";
 
 export default class NotificationCenter {
-	notify(user: User, message: string) {}
+	notifyByEmail(user: User, message: string) {}
+	notifyByText(user: User, message: string) {}
 }
