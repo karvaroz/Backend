@@ -3,6 +3,8 @@ import cors from "cors";
 import morgan from "morgan";
 import { SnakeRouter } from "./router/snake.routes";
 import { AppDataSource } from "./infrastructure/database/app.dbsource";
+import { PlayerRouter } from "./router/player.routes";
+import { BoardRouter } from "./router/board.routes";
 
 class ServerApp {
 	public app: express.Application = express();
@@ -10,7 +12,7 @@ class ServerApp {
 
 	constructor() {
 		this.app.use(express.json());
-		this.app.use(express.urlencoded({ extended: true }));
+		this.app.use(express.urlencoded({ extended: false }));
 
 		this.dbConnect();
 
@@ -20,8 +22,13 @@ class ServerApp {
 		this.app.use("/api", this.routers());
 		this.listen();
 	}
+	
 	routers(): Array<express.Router> {
-		return [new SnakeRouter().router];
+		return [
+			new SnakeRouter().router,
+			new PlayerRouter().router,
+			new BoardRouter().router,
+		];
 	}
 
 	async dbConnect() {
