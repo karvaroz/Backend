@@ -1,13 +1,14 @@
 import User from "./user";
+import EventLog from './eventLog';
 
-export default class UserRepository<User> {
-	public Insert(user: User): void {}
+export default class LogRepository<EventLog> {
+	public Insert(eventLog: EventLog): void {}
 
-	public Update(user: User): void {}
+	public Update(eventLog: EventLog): void {}
 
-	public Get(user: User) {
-		return new User();
-    }
-    
+	public Get(eventLog: EventLog) {
+		return new EventLog();
+	}
+
 	public Delete(id: number): void {}
 }

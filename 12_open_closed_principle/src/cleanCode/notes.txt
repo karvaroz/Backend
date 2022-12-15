@@ -1,0 +1,30 @@
+CODIGO LIMPIO - BUENAS PRACTICAS
+- Nos ayuda a tener mas dominio y confianza
+que el codigo esta mejor
+- Lo mas util posible
+- Mantenible en el tiempo
+- que otros puedan escribir sonre el codigo
+
+
+Cuando no hay tiempo se puede escribir mal codigo
+
+The total cost of owning a mess
+- Cuando se conoce el proyecto desde cero
+la productiva es mas rapido
+- La productiva tienda a bajar con el tiempo
+
+- Elegante y eficiente
+- Facil de mantener
+- rendimiento cerca a lo optimo
+- clean code hace una cosa bien (SOLID)
+
+
+BUENAS PRACTICAS
+- NOMBRE
+	significativos
+	revelen intenciones
+	evade desinformacion
+	nombres muy parecidos - hacer distinciones
+	nombres facil de pronunciar
+	evitar mapeo mental
+	No inventar nombres, ya existen muchos
