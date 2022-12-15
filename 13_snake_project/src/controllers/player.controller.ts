@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
-import { PlayerRepository } from "../domain/repository/player.repository";
+import "reflect-metadata";
 import { container } from "../infrastructure/inversify/inversify.config";
 import { PlayerService } from "../services/player.services";
 import { PLAYERSERVICE } from "../infrastructure/inversify/types";
-import { Player } from "../domain/entities/player.domain";
 
 export class PlayerController {
 	playerCreationService = container.get<PlayerService>(PLAYERSERVICE);

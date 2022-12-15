@@ -5,6 +5,7 @@ import { SnakeRouter } from "./router/snake.routes";
 import { AppDataSource } from "./infrastructure/database/app.dbsource";
 import { PlayerRouter } from "./router/player.routes";
 import { BoardRouter } from "./router/board.routes";
+import { GameRouter } from "./router/game.routes";
 
 class ServerApp {
 	public app: express.Application = express();
@@ -28,6 +29,7 @@ class ServerApp {
 			new SnakeRouter().router,
 			new PlayerRouter().router,
 			new BoardRouter().router,
+			new GameRouter().router
 		];
 	}
 

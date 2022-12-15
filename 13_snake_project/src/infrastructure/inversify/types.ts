@@ -7,5 +7,8 @@ export const BOARDSERVICE = Symbol("BOARDSERVICE");
 export const PLAYER = Symbol("PLAYER");
 export const PLAYERSERVICE = Symbol("PLAYERSERVICE");
 
+export const GAME = Symbol("GAME");
+export const GAMESERVICE = Symbol("GAMESERVICE");
+
 
 
