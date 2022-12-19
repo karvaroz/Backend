@@ -17,7 +17,7 @@ export default class SnakeDatabase implements SnakeRepository {
 		return repository.save(snake);
 	}
 
-	moveSnake(nextMove: DirectionType, snake: SnakeEntity) {
+	moveSnake(nextMove: DirectionType, snake: SnakeEntity, setLimit: number) {
 		const repository = AppDataSource.getRepository(SnakeEntity);
 		return console.log("MOVER");
 	}

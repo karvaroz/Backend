@@ -7,21 +7,21 @@ import { IPosition } from "../../../domain/interfaces/position";
 
 @injectable()
 export default class BoardDatabase implements BoardRepository {
-	createBoard(board: Board): Promise<Board> {
-		throw new Error("Method not implemented.");
+	async createBoard(board: Board) {
+		const repository = AppDataSource.getRepository(BoardEntity);
+		return await repository.save(board);
 	}
 
-	getBoardById(id: number): Promise<Board | null> {
-		throw new Error("Method not implemented.");
+	async getBoardById(id: number) {
+		const repository = AppDataSource.getRepository(BoardEntity);
+		return await repository.findOneBy({ id: id });
 	}
 
 	modifyBoard(board: Board): Promise<Board> {
-		throw new Error("Method not implemented.");
+		const repository = AppDataSource.getRepository(BoardEntity);
 	}
-	
+
 	generateRandom(boardSize: number): IPosition {
-		throw new Error("Method not implemented.");
+		const repository = AppDataSource.getRepository(BoardEntity);
 	}
-
-
 }
