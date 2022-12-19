@@ -9,11 +9,15 @@ import SnakeEntity from "./snake.entity";
 export default class SnakeDatabase implements SnakeRepository {
 	async createSnake(snake: Snake): Promise<Snake> {
 		const repository = AppDataSource.getRepository(SnakeEntity);
-			return await repository.save(snake);
+		return await repository.save(snake);
 	}
-	// async moveSnake(nextMove: string, snakeId: number, setLimit: number): Promise<Snake> {
+	// async moveSnake(
+	// 	nextMove: string,
+	// 	snakeId: number,
+	// 	setLimit: number
+	// ): Promise<Snake> {
 	// 	const repository = AppDataSource.getRepository(SnakeEntity);
-	// 	return await repository.save(nextMove, snakeId, setLimit)
+	// 	return await repository.save(nextMove, snakeId, setLimit);
 	// }
 	async getSnakeById(snakeId: number): Promise<Snake | null> {
 		const repository = AppDataSource.getRepository(SnakeEntity);
@@ -31,5 +35,4 @@ export default class SnakeDatabase implements SnakeRepository {
 		const repository = AppDataSource.getRepository(SnakeEntity);
 		console.log("Die");
 	}
-
 }

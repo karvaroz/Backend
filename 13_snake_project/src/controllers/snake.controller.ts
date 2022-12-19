@@ -44,10 +44,14 @@ export class SnakeController {
 	// 	}
 	// }
 
-	getSnakeById(req: Request, res: Response) {
-		res.status(200).json({
-			message: "TRAER SNAKE",
-		});
+	async getSnakeById(req: Request, res: Response) {
+		try {
+			const snakeId = parseInt(req.body.snakeId);
+			const getSnakeId = await this.snakeCreationService.getSnakeById(snakeId);
+			res.status(200).send(getSnakeId);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
 	}
 
 	updateSnake(req: Request, res: Response) {

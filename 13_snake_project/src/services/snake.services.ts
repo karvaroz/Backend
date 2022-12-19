@@ -1,6 +1,5 @@
 import { inject, injectable } from "inversify";
 import { Snake } from "../domain/entities/snake.domain";
-import { DirectionType } from "../domain/enums/directionType";
 import { SnakeRepository } from "../domain/repository/snake.repository";
 import { SNAKE } from "../infrastructure/inversify/types";
 
@@ -16,9 +15,9 @@ export class SnakeService {
 		return await this.snakeRepository.createSnake(snake);
 	}
 
-	// async moveSnake(infoUpdate: Snake, snakeId: number, setLimit: number) {
-	// 	return await this.snakeRepository.moveSnake(infoUpdate, snakeId, setLimit);
-	// }
+	//  async moveSnake(infoUpdate: Snake, snakeId: number, setLimit: number) {
+	//  	return await this.snakeRepository.moveSnake(infoUpdate, snakeId, setLimit);
+	//  }
 
 	async getSnakeById(id: number) {
 		return this.snakeRepository.getSnakeById(id);
