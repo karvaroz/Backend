@@ -1,12 +1,14 @@
 export default class GenerateRandomNumber {
-	randomNumber(maxNumber: number) { // Determinar el maximo numero
+	randomNumber(maxNumber: number) {
+		if (maxNumber <= 0) {
+			maxNumber = 10;
+		}
 		let counter: number = 1;
-		let prevRand: number = 1;
-		let time = new Date().getTime(); // Nos da el numero de milisegundos actuales
-		let randNumber: number = ((time / counter ) / (prevRand + 10)) % maxNumber; 
-        // +1 nunca sera cero - entre counter para que sea decimal, % divido entre el numero maximo
+		let prevRandom: number = 1;
+		let getTimeNow = new Date().getTime();
+		let randomValue = (getTimeNow / counter / prevRandom) % maxNumber;
 		counter++;
-		prevRand = randNumber;
-		return randNumber
+		prevRandom = randomValue;
+		return randomValue;
 	}
 }

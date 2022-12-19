@@ -1,5 +1,4 @@
 import { Board } from "../entities/board.domain";
-import { IPosition } from "../interfaces/position";
 
 export interface BoardRepository {
 	createBoard(board: Board): Promise<Board>;
