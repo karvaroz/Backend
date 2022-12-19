@@ -1,7 +1,9 @@
-import BoardEntity from "../../infrastructure/database/board/board.entity";
+import { Board } from "../entities/board.domain";
+import { IPosition } from "../interfaces/position";
 
 export interface BoardRepository {
-	createBoard(board: BoardEntity): Promise<BoardEntity>;
-	getBoardById(id: number): Promise<BoardEntity | null>;
-	modifyBoard( board: BoardEntity): Promise<BoardEntity>;
+	createBoard(board: Board): Promise<Board>;
+	getBoardById(id: number): Promise<Board | null>;
+	modifyBoard(board: Board): Promise<Board>;
+	generateRandom(boardSize: number): IPosition;
 }

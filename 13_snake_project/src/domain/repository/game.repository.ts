@@ -1,9 +1,9 @@
-import { DeleteResult } from "typeorm";
-import gameEntity from "../../infrastructure/database/game/game.entity";
+import { Game } from "../entities/game.domain";
 
 export interface GameRepository {
-	createGame(game: gameEntity): Promise<gameEntity>;
-	getGameById(id: number): Promise<gameEntity | null>;
-	updateGame(game: gameEntity): Promise<gameEntity>;
-	finishGame(id: number): Promise<DeleteResult>;
+	createGame(game: Game): Promise<Game>;
+	getGameById(id: number): Promise<Game | null>;
+	updateGame(game: Game): Promise<Game>;
+	finishGame(id: number): Promise<boolean>;
+	setGameStatus(): Promise<boolean>;
 }
