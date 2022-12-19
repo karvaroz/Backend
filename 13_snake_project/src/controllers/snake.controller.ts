@@ -21,8 +21,8 @@ export class SnakeController {
 				positionX: parseInt(req.body.positionX),
 				positionY: parseInt(req.body.positionY),
 			};
-			const newSnake = await this.snakeCreationService.createSnake(snake);
-			res.status(200).send(newSnake);
+			// const newSnake = await this.snakeCreationService.createSnake(snake);
+			// res.status(200).send(newSnake);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
