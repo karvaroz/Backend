@@ -9,13 +9,13 @@ export class PlayerController {
 
 	async createPlayer(req: Request, res: Response) {
 		try {
-			const player = {
-				id: parseInt(req.body.id),
-				name: req.body.name.toString(),
-				score: parseInt(req.body.score),
-			};
-			const newPlayer = await this.playerCreationService.createPlayer(player);
-			res.status(200).send(newPlayer)
+			// const player = {
+			// 	id: parseInt(req.body.id),
+			// 	name: req.body.name.toString(),
+			// 	score: parseInt(req.body.score),
+			// };
+			// const newPlayer = await this.playerCreationService.createPlayer(player);
+			// res.status(200).send(newPlayer)
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

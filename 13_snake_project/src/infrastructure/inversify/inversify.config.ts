@@ -1,20 +1,24 @@
 import { Container } from "inversify";
-import { SNAKE, SNAKESERVICE, BOARDSERVICE, BOARD, PLAYERSERVICE, PLAYER, GAMESERVICE, GAME } from './types';
+import { SNAKE, SNAKESERVICE, BOARDSERVICE, BOARD, PLAYERSERVICE, PLAYER, GAMESERVICE, GAME, FOOD, FOODSERVICE } from './types';
 
 import { BoardRepository } from "../../domain/repository/board.repository";
 import { PlayerRepository } from "../../domain/repository/player.repository";
 import { SnakeRepository } from "../../domain/repository/snake.repository";
 import { GameRepository } from "../../domain/repository/game.repository";
+import { FoodRepository } from "../../domain/repository/food.repository";
+
 
 import { BoardService } from "../../services/board.services";
 import { PlayerService } from "../../services/player.services";
 import { GameService } from "../../services/game.services";
 import { SnakeService } from "../../services/snake.services";
+import { FoodService } from "../../services/food.services";
 
 import SnakeDatabase from "../database/snake/snake.database";
 import BoardDatabase from "../database/board/board.database";
 import PlayerDatabase from "../database/player/player.database";
 import GameDatabase from "../database/game/game.database";
+import FoodDatabase from "../database/food/food.database";
 
 export const container = new Container();
 
@@ -29,3 +33,6 @@ container.bind<PlayerRepository>(PLAYER).to(PlayerDatabase);
 
 container.bind<GameRepository>(GAMESERVICE).to(GameService);
 container.bind<GameRepository>(GAME).to(GameDatabase);
+
+container.bind<FoodRepository>(FOODSERVICE).to(FoodService);
+container.bind<FoodRepository>(FOOD).to(FoodDatabase);

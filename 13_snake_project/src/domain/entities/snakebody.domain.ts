@@ -1,6 +1,5 @@
-import { IPosition } from "../interfaces/position";
-
 export class SnakeBody {
-    snakeBodyId!: number;
-    snakeBodyPosition!: IPosition;
+	snakeBodyId!: number;
+	snakeBodyPositionX!: number;
+	snakeBodyPositionY!: number;
 }

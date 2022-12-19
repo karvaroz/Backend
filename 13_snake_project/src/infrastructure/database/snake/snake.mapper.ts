@@ -6,7 +6,8 @@ export class snakeMapper {
 		const createSnakeEntity: Snake = new Snake();
 		createSnakeEntity.snakeId = snake.snakeId;
 		createSnakeEntity.snakeLength = snake.snakeLength;
-		createSnakeEntity.snakePosition = snake.snakePosition;
+		createSnakeEntity.snakePositionX = snake.snakePositionX;
+		createSnakeEntity.snakePositionY = snake.snakePositionY;
 		createSnakeEntity.snakeDirection = snake.snakeDirection;
 		return createSnakeEntity;
 	}

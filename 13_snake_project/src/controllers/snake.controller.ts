@@ -15,12 +15,12 @@ export class SnakeController {
 
 	async createSnake(req: Request, res: Response) {
 		try {
-			const snake = {
-				id: parseInt(req.body.id),
-				length: parseInt(req.body.length),
-				positionX: parseInt(req.body.positionX),
-				positionY: parseInt(req.body.positionY),
-			};
+			// const snake = {
+			// 	id: parseInt(req.body.id),
+			// 	length: parseInt(req.body.length),
+			// 	positionX: parseInt(req.body.positionX),
+			// 	positionY: parseInt(req.body.positionY),
+			// };
 			// const newSnake = await this.snakeCreationService.createSnake(snake);
 			// res.status(200).send(newSnake);
 		} catch (error) {

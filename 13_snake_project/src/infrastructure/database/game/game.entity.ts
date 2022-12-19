@@ -1,6 +1,5 @@
 import { Column, PrimaryColumn, Entity } from "typeorm";
 import { Game } from "../../../domain/entities/game.domain";
-import { IStatus } from "../../../domain/interfaces/status";
 
 @Entity()
 export default class GameEntity implements Game {
@@ -14,7 +13,7 @@ export default class GameEntity implements Game {
 	playerId!: number;
 
 	@Column()
-	gameStatus!: IStatus;
+	gameStatus!: string;
 
 	@Column()
 	snakeId!: number;

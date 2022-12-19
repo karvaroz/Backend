@@ -7,21 +7,36 @@ import { IPosition } from "../../../domain/interfaces/position";
 
 @injectable()
 export default class BoardDatabase implements BoardRepository {
-	async createBoard(board: Board) {
-		const repository = AppDataSource.getRepository(BoardEntity);
-		return await repository.save(board);
+	createBoard(board: Board): Promise<Board> {
+		throw new Error("Method not implemented.");
 	}
-
-	async getBoardById(id: number) {
-		const repository = AppDataSource.getRepository(BoardEntity);
-		return await repository.findOneBy({ id: id });
+	getBoardById(id: number): Promise<Board | null> {
+		throw new Error("Method not implemented.");
 	}
-
 	modifyBoard(board: Board): Promise<Board> {
-		const repository = AppDataSource.getRepository(BoardEntity);
+		throw new Error("Method not implemented.");
+	}
+	generateRandom(boardSize: number): IPosition {
+		throw new Error("Method not implemented.");
 	}
 
-	generateRandom(boardSize: number): IPosition {
-		const repository = AppDataSource.getRepository(BoardEntity);
-	}
 }
+
+
+	// async createBoard(board: Board) {
+	// 	const repository = AppDataSource.getRepository(BoardEntity);
+	// 	return await repository.save(board);
+	// }
+
+	// async getBoardById(id: number) {
+	// 	const repository = AppDataSource.getRepository(BoardEntity);
+	// 	return await repository.findOneBy({ id: id });
+	// }
+
+	// modifyBoard(board: Board): Promise<Board> {
+	// 	const repository = AppDataSource.getRepository(BoardEntity);
+	// }
+
+	// generateRandom(boardSize: number): IPosition {
+	// 	const repository = AppDataSource.getRepository(BoardEntity);
+	// }

@@ -9,13 +9,13 @@ export class GameController {
 
 	async createGame(req: Request, res: Response) {
 		try {
-			const game = {
-				id: parseInt(req.body.id),
-				snakeId: parseInt(req.body.snakeId),
-				boardId: parseInt(req.body.boardId),
-			};
-            const newGame = await this.gameCreationService.createGame(game);
-            res.status(200).send(newGame);
+			// const game = {
+			// 	id: parseInt(req.body.id),
+			// 	snakeId: parseInt(req.body.snakeId),
+			// 	boardId: parseInt(req.body.boardId),
+			// };
+            // const newGame = await this.gameCreationService.createGame(game);
+            // res.status(200).send(newGame);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

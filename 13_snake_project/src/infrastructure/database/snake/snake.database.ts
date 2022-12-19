@@ -7,38 +7,58 @@ import SnakeEntity from "./snake.entity";
 
 @injectable()
 export default class SnakeDatabase implements SnakeRepository {
-	initialPosition() {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		return console.log("Position inicial");
+	createSnake(snake: Snake): Promise<Snake> {
+		throw new Error("Method not implemented.");
+	}
+	moveSnake(nextMove: DirectionType, snake: Snake, setLimit: number): Promise<Snake> {
+		throw new Error("Method not implemented.");
+	}
+	getSnakeById(id: number): Promise<Snake | null> {
+		throw new Error("Method not implemented.");
+	}
+	updateSnake(newSnake: Snake): Promise<Snake> {
+		throw new Error("Method not implemented.");
+	}
+	growSnake(): void {
+		throw new Error("Method not implemented.");
+	}
+	dieSnake(): void {
+		throw new Error("Method not implemented.");
 	}
 
-	async createSnake(snake: SnakeEntity) {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		return repository.save(snake);
-	}
-
-	moveSnake(nextMove: DirectionType, snake: SnakeEntity, setLimit: number) {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		return console.log("MOVER");
-	}
-
-	async getSnakeById(id: number) {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		return repository.findOneBy({ id });
-	}
-
-	async updateSnake(newSnake: SnakeEntity) {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		return await repository.save(newSnake);
-	}
-
-	async growSnake() {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		console.log("GROW");
-	}
-
-	async dieSnake() {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		console.log("Die");
-	}
 }
+
+	// initialPosition() {
+	// 	const repository = AppDataSource.getRepository(SnakeEntity);
+	// 	return console.log("Position inicial");
+	// }
+
+	// async createSnake(snake: SnakeEntity) {
+	// 	const repository = AppDataSource.getRepository(SnakeEntity);
+	// 	return repository.save(snake);
+	// }
+
+	// moveSnake(nextMove: DirectionType, snake: SnakeEntity, setLimit: number) {
+	// 	const repository = AppDataSource.getRepository(SnakeEntity);
+	// 	return console.log("MOVER");
+	// }
+
+	// async getSnakeById(id: number) {
+	// 	const repository = AppDataSource.getRepository(SnakeEntity);
+	// 	return repository.findOneBy({ id });
+	// }
+
+	// async updateSnake(newSnake: SnakeEntity) {
+	// 	const repository = AppDataSource.getRepository(SnakeEntity);
+	// 	return await repository.save(newSnake);
+	// }
+
+	// async growSnake() {
+	// 	const repository = AppDataSource.getRepository(SnakeEntity);
+	// 	console.log("GROW");
+	// }
+
+	// async dieSnake() {
+	// 	const repository = AppDataSource.getRepository(SnakeEntity);
+	// 	console.log("Die");
+	// }
