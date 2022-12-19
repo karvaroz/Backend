@@ -1,5 +1,8 @@
+import { IStatus } from "../interfaces/status";
 export class Game {
-	id!: number;
+	gameId!: number;
 	snakeId!: number;
 	boardId!: number;
+	playerId!: number;
+	gameStatus!: IStatus;
 }

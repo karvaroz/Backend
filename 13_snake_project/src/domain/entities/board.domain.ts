@@ -1,5 +1,5 @@
 export class Board {
-	id!: number;
+	boardId!: number;
 	width!: number;
 	height!: number;
 }

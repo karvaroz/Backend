@@ -28,3 +28,27 @@ BUENAS PRACTICAS
 	nombres facil de pronunciar
 	evitar mapeo mental
 	No inventar nombres, ya existen muchos
+	Los nombre de las clases no son verbos
+Las funciones para nombrar tener en cuenta
+- El Retorno
+- Nombre de la funcion
+- Los argumentos
+
+Usar solution domain names
+- Ej: El repository 
+
+La claridad es lo que importa
+
+FUNCIONES
+
+Dos reglas para las funciones
+- Deben ser pequeñas
+- Aun mas pequeñas
+
+Un nivel por debajo las cosas
+
+Mejor numero de argumentos en una funcion
+- 0 argumentos Pref. - 2 Max
+
+Efectos secundarios
+- La funcion nombrada hace mas u otra cosa diferente a lo que dice su nombre
