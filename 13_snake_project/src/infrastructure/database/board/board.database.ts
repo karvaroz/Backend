@@ -23,4 +23,5 @@ export default class BoardDatabase implements BoardRepository {
 		throw new Error("Method not implemented.");
 	}
 
+
 }

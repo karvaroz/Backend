@@ -4,12 +4,11 @@ import { Player } from "../../../domain/entities/player.domain";
 @Entity()
 export default class PlayerEntity implements Player {
 	@PrimaryColumn()
-	id!: number;
+	playerId!: number;
 
 	@Column()
 	name!: string;
 
 	@Column()
 	score!: number;
-
 }

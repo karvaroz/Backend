@@ -1,17 +1,19 @@
 import { Snake } from "../../../domain/entities/snake.domain";
 import { Column, PrimaryColumn, Entity } from "typeorm";
+import { DirectionType } from "../../../domain/enums/directionType";
+import { IPosition } from "../../../domain/interfaces/position";
 
 @Entity()
 export default class SnakeEntity implements Snake {
 	@PrimaryColumn()
-	id!: number;
+	snakeId!: number;
 
 	@Column()
-	length!: number;
+	snakeLength!: number;
+
+	@Column()
+	snakePosition!: IPosition;
 	
 	@Column()
-	positionX!: number;
-	
-	@Column()
-	positionY!: number;
+	snakeDirection!: DirectionType;
 }

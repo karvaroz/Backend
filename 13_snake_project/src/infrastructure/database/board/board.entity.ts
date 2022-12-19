@@ -4,7 +4,7 @@ import { Board } from "../../../domain/entities/board.domain";
 @Entity()
 export default class BoardEntity implements Board {
 	@PrimaryColumn()
-	id!: number;
+	boardId!: number;
 
 	@Column()
 	width!: number;
