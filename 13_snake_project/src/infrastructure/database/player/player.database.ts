@@ -5,27 +5,20 @@ import PlayerEntity from "./player.entity";
 
 @injectable()
 export default class PlayerDatabase implements PlayerRepository {
-	createPlayer(player: PlayerEntity): Promise<PlayerEntity> {
-		throw new Error("Method not implemented.");
+	async createPlayer(player: PlayerEntity): Promise<PlayerEntity> {
+		const repository = AppDataSource.getRepository(PlayerEntity);
+		return await repository.save(player);
 	}
-	getPlayerById(id: number): Promise<PlayerEntity | null> {
-		throw new Error("Method not implemented.");
+
+	async getPlayerById(playerId: number): Promise<PlayerEntity | null> {
+		const repository = AppDataSource.getRepository(PlayerEntity);
+		return await repository.findOneBy({ playerId });
 	}
-	updatePlayer(player: PlayerEntity): Promise<PlayerEntity> {
-		throw new Error("Method not implemented.");
+
+	async updatePlayer(player: PlayerEntity): Promise<PlayerEntity> {
+		const repository = AppDataSource.getRepository(PlayerEntity);
+		return await repository.save(player);
 	}
 
 }
 
-	// async createPlayer(player: PlayerEntity) {
-	// 	const repository = AppDataSource.getRepository(PlayerEntity);
-	// 	return await repository.save(player);
-	// }
-	// async getPlayerById(id: number) {
-	// 	const repository = AppDataSource.getRepository(PlayerEntity);
-	// 	return await repository.findOneBy({ id });
-	// }
-	// async updatePlayer(player: PlayerEntity) {
-	// 	const repository = AppDataSource.getRepository(PlayerEntity);
-	// 	return await repository.save(player);
-	// }

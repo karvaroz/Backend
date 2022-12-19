@@ -1,20 +1,31 @@
 import { injectable } from "inversify";
 import { Food } from "../../../domain/entities/food.domain";
-import { FoodRepository } from '../../../domain/repository/food.repository';
+import { FoodRepository } from "../../../domain/repository/food.repository";
+import { AppDataSource } from "../app.dbsource";
+import FoodEntity from "./food.entity";
 
 @injectable()
-export default class FoodDatabase implements FoodRepository{
-    generateFood(food: Food): Promise<Food> {
-        throw new Error("Method not implemented.");
-    }
-    getFoodById(foodId: number): Promise<Food | null> {
-        throw new Error("Method not implemented.");
-    }
-    updateFood(food: Food): Promise<Food> {
-        throw new Error("Method not implemented.");
-    }
-    deleteFood(foodId: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
-    }
-    
+export default class FoodDatabase implements FoodRepository {
+	async generateFood(food: Food): Promise<Food> {
+		const repository = AppDataSource.getRepository(FoodEntity);
+		return await repository.save(food);
+	}
+
+	async getFoodById(idFood: number): Promise<Food | null> {
+		const repository = AppDataSource.getRepository(FoodEntity);
+		return await repository.findOneBy({ idFood });
+	}
+
+	async updateFood(food: Food): Promise<Food> {
+		const repository = AppDataSource.getRepository(FoodEntity);
+		return await repository.save(food);
+	}
+
+	async deleteFood(idFood: number): Promise<boolean> {
+		const repository = AppDataSource.getRepository(FoodEntity);
+		if (await repository.delete(idFood)) {
+			return true;
+		}
+		return false;
+	}
 }

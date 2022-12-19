@@ -3,7 +3,7 @@ import { IPosition } from "../interfaces/position";
 
 export interface BoardRepository {
 	createBoard(board: Board): Promise<Board>;
-	getBoardById(id: number): Promise<Board | null>;
+	getBoardById(boardId: number): Promise<Board | null>;
 	modifyBoard(board: Board): Promise<Board>;
 	generateRandom(boardSize: number): IPosition;
 }

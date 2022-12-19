@@ -6,28 +6,33 @@ import GameEntity from "./game.entity";
 
 @injectable()
 export default class GameDatabase implements GameRepository {
-	createGame(game: Game): Promise<Game> {
-		throw new Error("Method not implemented.");
+	async createGame(game: Game): Promise<Game> {
+		const repository = AppDataSource.getRepository(GameEntity);
+		return await repository.save(game);
 	}
-	getGameById(id: number): Promise<Game | null> {
-		throw new Error("Method not implemented.");
+
+	async getGameById(gameId: number): Promise<Game | null> {
+		const repository = AppDataSource.getRepository(GameEntity);
+		return await repository.findOneBy({ gameId });
 	}
-	updateGame(game: Game): Promise<Game> {
-		throw new Error("Method not implemented.");
+
+	async updateGame(game: Game): Promise<Game> {
+		const repository = AppDataSource.getRepository(GameEntity);
+		return await repository.save(game);
 	}
-	finishGame(id: number): Promise<boolean> {
-		throw new Error("Method not implemented.");
+
+	async finishGame(gameId: number): Promise<boolean> {
+		const repository = AppDataSource.getRepository(GameEntity);
+		return true
 	}
-	setGameStatus(id: number): Promise<boolean> {
-		throw new Error("Method not implemented.");
+
+	async setGameStatus(gameId: number): Promise<boolean> {
+		const repository = AppDataSource.getRepository(GameEntity);
+		return true
 	}
 
 }
 
-	// async createGame(game: GameEntity) {
-	// 	const repository = AppDataSource.getRepository(GameEntity);
-	// 	return await repository.save(game);
-	// }
 	// async getGameById(id: number) {
 	// 	const repository = AppDataSource.getRepository(GameEntity);
 	// 	return await repository.findOneBy({ id });

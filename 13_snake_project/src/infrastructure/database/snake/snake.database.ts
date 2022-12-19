@@ -7,58 +7,30 @@ import SnakeEntity from "./snake.entity";
 
 @injectable()
 export default class SnakeDatabase implements SnakeRepository {
-	createSnake(snake: Snake): Promise<Snake> {
-		throw new Error("Method not implemented.");
+	async createSnake(snake: Snake): Promise<Snake> {
+		const repository = AppDataSource.getRepository(SnakeEntity);
+			return await repository.save(snake);
 	}
-	moveSnake(nextMove: DirectionType, snake: Snake, setLimit: number): Promise<Snake> {
-		throw new Error("Method not implemented.");
+	async moveSnake(nextMove: DirectionType, snake: Snake, setLimit: number): Promise<Snake> {
+		const repository = AppDataSource.getRepository(SnakeEntity);
+		console.log("MOVER");
+		return snake
 	}
-	getSnakeById(id: number): Promise<Snake | null> {
-		throw new Error("Method not implemented.");
+	async getSnakeById(snakeId: number): Promise<Snake | null> {
+		const repository = AppDataSource.getRepository(SnakeEntity);
+		return repository.findOneBy({ snakeId });
 	}
-	updateSnake(newSnake: Snake): Promise<Snake> {
-		throw new Error("Method not implemented.");
+	async updateSnake(newSnake: Snake): Promise<Snake> {
+		const repository = AppDataSource.getRepository(SnakeEntity);
+		return await repository.save(newSnake);
 	}
 	growSnake(): void {
-		throw new Error("Method not implemented.");
+		const repository = AppDataSource.getRepository(SnakeEntity);
+		console.log("GROW");
 	}
 	dieSnake(): void {
-		throw new Error("Method not implemented.");
+		const repository = AppDataSource.getRepository(SnakeEntity);
+		console.log("Die");
 	}
 
 }
-
-	// initialPosition() {
-	// 	const repository = AppDataSource.getRepository(SnakeEntity);
-	// 	return console.log("Position inicial");
-	// }
-
-	// async createSnake(snake: SnakeEntity) {
-	// 	const repository = AppDataSource.getRepository(SnakeEntity);
-	// 	return repository.save(snake);
-	// }
-
-	// moveSnake(nextMove: DirectionType, snake: SnakeEntity, setLimit: number) {
-	// 	const repository = AppDataSource.getRepository(SnakeEntity);
-	// 	return console.log("MOVER");
-	// }
-
-	// async getSnakeById(id: number) {
-	// 	const repository = AppDataSource.getRepository(SnakeEntity);
-	// 	return repository.findOneBy({ id });
-	// }
-
-	// async updateSnake(newSnake: SnakeEntity) {
-	// 	const repository = AppDataSource.getRepository(SnakeEntity);
-	// 	return await repository.save(newSnake);
-	// }
-
-	// async growSnake() {
-	// 	const repository = AppDataSource.getRepository(SnakeEntity);
-	// 	console.log("GROW");
-	// }
-
-	// async dieSnake() {
-	// 	const repository = AppDataSource.getRepository(SnakeEntity);
-	// 	console.log("Die");
-	// }
