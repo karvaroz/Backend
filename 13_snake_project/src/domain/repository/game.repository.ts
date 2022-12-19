@@ -5,5 +5,5 @@ export interface GameRepository {
 	getGameById(id: number): Promise<Game | null>;
 	updateGame(game: Game): Promise<Game>;
 	finishGame(id: number): Promise<boolean>;
-	setGameStatus(): Promise<boolean>;
+	setGameStatus(id: number): Promise<boolean>;
 }

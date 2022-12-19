@@ -4,7 +4,7 @@ import { PlayerRepository } from "../domain/repository/player.repository";
 import { PLAYER } from "../infrastructure/inversify/types";
 
 @injectable()
-export class PlayerService implements PlayerRepository {
+export class PlayerService {
 	private playerRepository: PlayerRepository;
 
 	constructor(@inject(PLAYER) playerRepository: PlayerRepository) {
