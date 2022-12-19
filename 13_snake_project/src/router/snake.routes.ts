@@ -7,9 +7,6 @@ export class SnakeRouter extends BaseRouter<SnakeController> {
 	}
 
 	routes(): void {
-		this.router.get("/snake/position/:id", (req, res) =>
-			this.controller.initialPosition(req, res)
-		);
 		this.router.post("/snake/create", (req, res) =>
 			this.controller.createSnake(req, res)
 		);

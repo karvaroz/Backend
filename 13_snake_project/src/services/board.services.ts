@@ -23,7 +23,5 @@ export class BoardService {
 		return await this.boardRepository.modifyBoard(board);
 	}
 
-	generateRandom(boardSize: number) {
-		return this.boardRepository.generateRandom(boardSize);
-	}
+
 }

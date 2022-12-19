@@ -52,3 +52,44 @@ Mejor numero de argumentos en una funcion
 
 Efectos secundarios
 - La funcion nombrada hace mas u otra cosa diferente a lo que dice su nombre
+
+Comentarios - Reglas
+- Lo mejor es no tener comentarios
+- Legal copyrights
+- Los buenos comentarios estan como headers y son informativos
+- Los buenos comentarios explanation of intent - clarification
+- Warning of consequences - ToDo por hacer en el codigo
+- Amplification
+- Mostrar la documentacion de Public APIS
+
+
+MALOS Comentarios
+- Rellenar con comentarios para no dejar espacios vacios
+- Comentarios redundantes
+- Comentario engañosos
+- Mandated comments
+- Scary Noise - separadores en las clases
+- commented-out code
+- Nonlocal 
+- Comentarios con mucha informacion
+- Inobvious connection - No entendible
+- No meter console.log()
+- Utilizar librerias de logger
+
+BUENAS PRACTICAS
+- FORMATING
+- No olvidar los Goals of software design
+
+- Si alguien ve el codigo debe estar organizado
+- Proposito: comunicar mejor a los que vengan
+
+- Vertical openness between concepts
+- Espacios verticales 
+
+Horizontal
+Indentacion 
+
+
+
+
+

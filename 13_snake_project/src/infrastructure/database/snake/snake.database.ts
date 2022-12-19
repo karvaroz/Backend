@@ -11,11 +11,10 @@ export default class SnakeDatabase implements SnakeRepository {
 		const repository = AppDataSource.getRepository(SnakeEntity);
 			return await repository.save(snake);
 	}
-	async moveSnake(nextMove: DirectionType, snake: Snake, setLimit: number): Promise<Snake> {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		console.log("MOVER");
-		return snake
-	}
+	// async moveSnake(nextMove: string, snakeId: number, setLimit: number): Promise<Snake> {
+	// 	const repository = AppDataSource.getRepository(SnakeEntity);
+	// 	return await repository.save(nextMove, snakeId, setLimit)
+	// }
 	async getSnakeById(snakeId: number): Promise<Snake | null> {
 		const repository = AppDataSource.getRepository(SnakeEntity);
 		return repository.findOneBy({ snakeId });

@@ -16,14 +16,14 @@ export class SnakeService {
 		return await this.snakeRepository.createSnake(snake);
 	}
 
-	async moveSnake(nextMove: DirectionType, snake: Snake, setLimit: number) {
-		return await this.snakeRepository.moveSnake(nextMove, snake, setLimit);
-	}
+	// async moveSnake(infoUpdate: Snake, snakeId: number, setLimit: number) {
+	// 	return await this.snakeRepository.moveSnake(infoUpdate, snakeId, setLimit);
+	// }
 
 	async getSnakeById(id: number) {
 		return this.snakeRepository.getSnakeById(id);
 	}
-	
+
 	async updateSnake(newSnake: Snake) {
 		return this.snakeRepository.updateSnake(newSnake);
 	}
@@ -31,7 +31,7 @@ export class SnakeService {
 	growSnake() {
 		return this.snakeRepository.growSnake();
 	}
-	
+
 	dieSnake() {
 		return this.snakeRepository.dieSnake();
 	}
