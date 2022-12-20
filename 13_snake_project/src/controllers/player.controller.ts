@@ -10,7 +10,7 @@ export class PlayerController {
 	async createPlayer(req: Request, res: Response) {
 		try {
 			const player = {
-				playerId: parseInt(req.body.id),
+				playerId: parseInt(req.body.playerId),
 				name: req.body.name.toString(),
 				score: parseInt(req.body.score),
 			};

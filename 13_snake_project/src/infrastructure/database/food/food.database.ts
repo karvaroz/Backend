@@ -13,9 +13,11 @@ export default class FoodDatabase implements FoodRepository {
 		return await repository.save(food);
 	}
 
-	async getFoodById(idFood: number): Promise<Food | null> {
+	async getFoodById(idFood: number): Promise<Food> {
 		const repository = AppDataSource.getRepository(FoodEntity);
-		return await repository.findOneBy({ idFood });
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const result =  await repository.findOneBy({ idFood });
+		return result!
 	}
 
 	async deleteFood(idFood: number): Promise<DeleteResult> {

@@ -10,9 +10,11 @@ export default class PlayerDatabase implements PlayerRepository {
 		return await repository.save(player);
 	}
 
-	async getPlayerById(playerId: number): Promise<PlayerEntity | null> {
+	async getPlayerById(playerId: number): Promise<PlayerEntity> {
 		const repository = AppDataSource.getRepository(PlayerEntity);
-		return await repository.findOneBy({ playerId });
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const result = await repository.findOneBy({ playerId });
+		return result!
 	}
 
 	async updatePlayer(player: PlayerEntity): Promise<PlayerEntity> {

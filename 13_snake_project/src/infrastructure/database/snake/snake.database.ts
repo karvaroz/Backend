@@ -16,9 +16,11 @@ export default class SnakeDatabase implements SnakeRepository {
 		return await repository.save(snake);
 	}
 
-	async getSnakeById(snakeId: number): Promise<Snake | null> {
+	async getSnakeById(snakeId: number): Promise<Snake> {
 		const repository = AppDataSource.getRepository(SnakeEntity);
-		return repository.findOneBy({ snakeId });
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const result = await repository.findOneBy({ snakeId });
+		return result!;
 	}
 
 	async updateSnake(newSnake: Snake): Promise<Snake> {

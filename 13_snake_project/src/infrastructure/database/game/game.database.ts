@@ -11,9 +11,11 @@ export default class GameDatabase implements GameRepository {
 		return await repository.save(game);
 	}
 
-	async getGameById(gameId: number): Promise<Game | null> {
+	async getGameById(gameId: number): Promise<Game> {
 		const repository = AppDataSource.getRepository(GameEntity);
-		return await repository.findOneBy({ gameId });
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const result = await repository.findOneBy({ gameId });
+		return result!
 	}
 
 	async restartGame(gameId: number, game: Game): Promise<Game> {
