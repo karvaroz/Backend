@@ -39,19 +39,15 @@ export class GameService {
 		return await this.gameRepository.createGame(game);
 	}
 
-	async getGameById(id: number) {
-		return await this.gameRepository.getGameById(id);
+	async getGameById(gameId: number) {
+		return await this.gameRepository.getGameById(gameId);
 	}
 
-	async updateGame(game: Game) {
-		return await this.gameRepository.updateGame(game);
+	async restartGame(gameId: number, game: Game) {
+		return await this.gameRepository.restartGame(gameId, game);
 	}
 
-	async finishGame(id: number) {
-		return await this.gameRepository.finishGame(id);
-	}
-
-	async setGameStatus(id: number) {
-		return await this.gameRepository.setGameStatus(id);
+	async setGameStatus(gameId: number, game: Game) {
+		return await this.gameRepository.setGameStatus(gameId, game);
 	}
 }

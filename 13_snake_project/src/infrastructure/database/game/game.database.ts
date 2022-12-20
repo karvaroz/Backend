@@ -16,32 +16,14 @@ export default class GameDatabase implements GameRepository {
 		return await repository.findOneBy({ gameId });
 	}
 
-	async updateGame(game: Game): Promise<Game> {
+	async restartGame(gameId: number, game: Game): Promise<Game> {
 		const repository = AppDataSource.getRepository(GameEntity);
 		return await repository.save(game);
 	}
 
-	async finishGame(gameId: number): Promise<boolean> {
+	async setGameStatus(gameId: number, game: Game): Promise<Game> {
 		const repository = AppDataSource.getRepository(GameEntity);
-		return true
+		return await repository.save(game);
 	}
-
-	async setGameStatus(gameId: number): Promise<boolean> {
-		const repository = AppDataSource.getRepository(GameEntity);
-		return true
-	}
-
 }
 
-	// async getGameById(id: number) {
-	// 	const repository = AppDataSource.getRepository(GameEntity);
-	// 	return await repository.findOneBy({ id });
-	// }
-	// async updateGame(game: GameEntity) {
-	// 	const repository = AppDataSource.getRepository(GameEntity);
-	// 	return await repository.save(game);
-	// }
-	// async finishGame(id: number) {
-	// 	const repository = AppDataSource.getRepository(GameEntity);
-	// 	return await repository.delete({ id });
-	// }
