@@ -58,8 +58,9 @@ export class SnakeController {
 
 	async updateSnake(req: Request, res: Response) {
 		try {
+			const snakeId = parseInt(req.body.snakeId);
 			const snakeToUpdate = await this.snakeCreationService.getSnakeById(
-				req.body.snakeId
+				snakeId
 			);
 			if (snakeToUpdate) {
 				snakeToUpdate.snakeLength = parseInt(req.body.snakeLength);
@@ -78,13 +79,13 @@ export class SnakeController {
 
 	async eatSnake(req: Request, res: Response) {
 		try {
-			const snakeId = await this.snakeCreationService.getSnakeById(
-				req.body.snakeId
-			);
-			if (snakeId) {
-				snakeId.snakeLength
+			const snakeId = parseInt(req.body.snakeId);
+			const snake = await this.snakeCreationService.getSnakeById(snakeId);
+			if (snake) {
+				snake.snakeLength += parseInt(req.body.extraPoints);
+				const snakeUpdated = await this.snakeCreationService.updateSnake(snake);
+				res.status(200).send(snakeUpdated);
 			}
-			
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
