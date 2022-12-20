@@ -26,20 +26,25 @@ export class SnakeController {
 		}
 	}
 
-	// async moveSnake(req: Request, res: Response) {
-	// 	try {
-	// 		const snakeId = parseInt(req.body.snakeId);
-	// 		const snake = await this.snakeCreationService.getSnakeById(snakeId);
-	// 		if (snake) {
-	// 			snake.snakeDirection = req.body.nextMove.toString();
-	// 			snake.snakePositionX = parseInt(snake.snakePositionX + req.body.setLimit);
-	// 		}
-	// 		const updateSnakePosition = await this.snakeCreationService.updateSnake(snake);
-	// 		res.status(200).send(updateSnakePosition);
-	// 	} catch (error) {
-	// 		res.status(500).send({ error: error });
-	// 	}
-	// }
+	async moveSnake(req: Request, res: Response) {
+		try {
+			const snakeId = parseInt(req.body.snakeId);
+			const snake = await this.snakeCreationService.getSnakeById(snakeId);
+			if (snake) {
+				snake.snakeDirection = req.body.nextMove.toString();
+				const updateSnakePosition = await this.snakeCreationService.updateSnake(
+					snake
+				);
+				const snakePosition = await this.snakeCreationService.moveSnake(
+					updateSnakePosition,
+					parseInt(req.body.stepsToMove)
+				);
+				res.status(200).send(updateSnakePosition);
+			}
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
+	}
 
 	async getSnakeById(req: Request, res: Response) {
 		try {
@@ -57,12 +62,29 @@ export class SnakeController {
 				req.body.snakeId
 			);
 			if (snakeToUpdate) {
+				snakeToUpdate.snakeLength = parseInt(req.body.snakeLength);
+				snakeToUpdate.snakePositionX = parseInt(req.body.snakePositionX);
+				snakeToUpdate.snakePositionY = parseInt(req.body.snakePositionY);
 				snakeToUpdate.snakeDirection = req.body.snakeDirection;
 				const snakeUpdated = await this.snakeCreationService.updateSnake(
 					snakeToUpdate
 				);
 				res.status(200).send(snakeUpdated);
 			}
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
+	}
+
+	async eatSnake(req: Request, res: Response) {
+		try {
+			const snakeId = await this.snakeCreationService.getSnakeById(
+				req.body.snakeId
+			);
+			if (snakeId) {
+				snakeId.snakeLength
+			}
+			
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

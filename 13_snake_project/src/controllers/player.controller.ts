@@ -9,22 +9,24 @@ export class PlayerController {
 
 	async createPlayer(req: Request, res: Response) {
 		try {
-			// const player = {
-			// 	id: parseInt(req.body.id),
-			// 	name: req.body.name.toString(),
-			// 	score: parseInt(req.body.score),
-			// };
-			// const newPlayer = await this.playerCreationService.createPlayer(player);
-			// res.status(200).send(newPlayer)
+			const player = {
+				playerId: parseInt(req.body.id),
+				name: req.body.name.toString(),
+				score: parseInt(req.body.score),
+			};
+			const newPlayer = await this.playerCreationService.createPlayer(player);
+			res.status(200).send(newPlayer);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
 	}
+	
 	getPlayerById(req: Request, res: Response) {
 		res.status(200).json({
 			message: "TRAER PLAYER",
 		});
 	}
+
 	updatePlayer(req: Request, res: Response) {
 		res.status(200).json({
 			message: "ACTUALIZAR PLAYER",
