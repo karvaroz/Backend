@@ -10,6 +10,7 @@ export default class BoardDatabase implements BoardRepository {
 		const repository = AppDataSource.getRepository(BoardEntity);
 		return await repository.save(board);
 	}
+	
 	async getBoardById(boardId: number): Promise<Board | null> {
 		const repository = AppDataSource.getRepository(BoardEntity);
 		return await repository.findOneBy({boardId});

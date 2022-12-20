@@ -30,7 +30,9 @@ export class SnakeController {
 		try {
 			const snakeId = parseInt(req.body.snakeId);
 			const snake = await this.snakeCreationService.getSnakeById(snakeId);
+
 			if (snake) {
+				
 				snake.snakeDirection = req.body.nextMove.toString();
 				const updateSnakePosition = await this.snakeCreationService.updateSnake(
 					snake

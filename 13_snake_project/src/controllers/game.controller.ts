@@ -63,16 +63,39 @@ export class GameController {
 		}
 	}
 
-	getGameById(req: Request, res: Response) {
-		res.status(200).json({
-			message: "CREAR BOARD",
-		});
+	async getGameById(req: Request, res: Response) {
+		try {
+			const gameId = parseInt(req.body.gameId);
+			const game = await this.gameCreationService.getGameById(gameId);
+			res.status(200).send(game);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
 	}
 
-	restartGame(req: Request, res: Response) {
-		res.status(200).json({
-			message: "CREAR BOARD",
-		});
+	async restartGame(req: Request, res: Response) {
+		try {
+			const getGameId = await this.gameCreationService.getGameById(
+				parseInt(req.body.gameId)
+			);
+			if (getGameId) {
+				const getBoardId = await this.boardCreationService.getBoardById(
+					getGameId.boardId
+				);
+				const getSnakeId = await this.snakeCreationService.getSnakeById(
+					getGameId.snakeId
+				);
+				const getFoodId = await this.foodCreationService.getFoodById(
+					getGameId.foodId
+				);
+				const getPlayerId = await this.playerCreationService.getPlayerById(
+					getGameId.playerId
+				);
+				const getGameStatus = req.body.gameStatus.toString();
+			}
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
 	}
 
 	setGameStatus(req: Request, res: Response) {
