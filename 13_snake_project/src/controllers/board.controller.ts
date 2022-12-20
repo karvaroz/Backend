@@ -6,7 +6,7 @@ import { BoardService } from "../services/board.services";
 
 export class BoardController {
 	boardCreationService = container.get<BoardService>(BOARDSERVICE);
-	
+
 	async createBoard(req: Request, res: Response) {
 		try {
 			const board = {
@@ -21,15 +21,27 @@ export class BoardController {
 		}
 	}
 
-	getBoardById(req: Request, res: Response) {
-		res.status(200).json({
-			message: "TRAER BOARD",
-		});
+	async getBoardById(req: Request, res: Response) {
+		try {
+			const boardId = parseInt(req.body.boardId);
+			const geBoard = await this.boardCreationService.getBoardById(boardId);
+			res.status(200).send(geBoard);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
 	}
 
-	modifyBoard(req: Request, res: Response) {
-		res.status(200).json({
-			message: "TMODIFICAR BOARD",
-		});
+	async modifyBoard(req: Request, res: Response) {
+		try {
+			const boardId = parseInt(req.body.boardId);
+			const boardToUpdate = await this.boardCreationService.getBoardById(boardId);
+			if (boardToUpdate) {
+				boardToUpdate.height = parseInt(req.body.height);
+				boardToUpdate.width = parseInt(req.body.width);
+				res.status(200).send(boardToUpdate);
+			}
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
 	}
 }
