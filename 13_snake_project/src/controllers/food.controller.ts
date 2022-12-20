@@ -26,5 +26,17 @@ export class FoodController {
 
 	async getFoodById(req: Request, res: Response) {}
 
-	async deleteFood(req: Request, res: Response) {}
+	async deleteFood(req: Request, res: Response) {
+		try {
+			const foodId = parseInt(req.body.idFood);
+			const foodToDelete = await this.foodCreationService.deleteFood(foodId);
+			res.status(200).json(
+				{
+					message: `idFood ${foodToDelete.affected} deleted successfully`
+				}
+			);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
+	}
 }
