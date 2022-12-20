@@ -98,9 +98,16 @@ export class GameController {
 		}
 	}
 
-	setGameStatus(req: Request, res: Response) {
-		res.status(200).json({
-			message: "CREAR BOARD",
-		});
+	async setGameStatus(req: Request, res: Response) {
+		try {
+			const gameId = parseInt(req.body.gameId);
+			const game = await this.gameCreationService.getGameById(gameId);
+			if (game) {
+				game.gameStatus = req.body.gameStatus.toString();
+				res.status(200).send(game);
+			}
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
 	}
 }
