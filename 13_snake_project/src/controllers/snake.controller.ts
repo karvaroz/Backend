@@ -28,17 +28,14 @@ export class SnakeController {
 
 	// async moveSnake(req: Request, res: Response) {
 	// 	try {
-	// 		const snakeToMove = {
-	// 			snakeId: parseInt(req.body.snakeId),
-	// 			nextMove: req.body.nextMove.toString(),
-	// 			setLimit: parseInt(req.body.snakeId),
-	// 		};
-	// 		const moveSnake = await this.snakeCreationService.moveSnake(
-	// 			snakeToMove.nextMove,
-	// 			snakeToMove.snakeId,
-	// 			snakeToMove.setLimit
-	// 		);
-	// 		res.status(200).send(moveSnake);
+	// 		const snakeId = parseInt(req.body.snakeId);
+	// 		const snake = await this.snakeCreationService.getSnakeById(snakeId);
+	// 		if (snake) {
+	// 			snake.snakeDirection = req.body.nextMove.toString();
+	// 			snake.snakePositionX = parseInt(snake.snakePositionX + req.body.setLimit);
+	// 		}
+	// 		const updateSnakePosition = await this.snakeCreationService.updateSnake(snake);
+	// 		res.status(200).send(updateSnakePosition);
 	// 	} catch (error) {
 	// 		res.status(500).send({ error: error });
 	// 	}
@@ -54,21 +51,20 @@ export class SnakeController {
 		}
 	}
 
-	updateSnake(req: Request, res: Response) {
-		res.status(200).json({
-			message: "ACTUALIZAR SNAKE",
-		});
-	}
-
-	growSnake(req: Request, res: Response) {
-		res.status(200).json({
-			message: "CRECER SNAKE",
-		});
-	}
-
-	dieSnake(req: Request, res: Response) {
-		res.status(200).json({
-			message: "MUERE SNAKE",
-		});
+	async updateSnake(req: Request, res: Response) {
+		try {
+			const snakeToUpdate = await this.snakeCreationService.getSnakeById(
+				req.body.snakeId
+			);
+			if (snakeToUpdate) {
+				snakeToUpdate.snakeDirection = req.body.snakeDirection;
+				const snakeUpdated = await this.snakeCreationService.updateSnake(
+					snakeToUpdate
+				);
+				res.status(200).send(snakeUpdated);
+			}
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
 	}
 }

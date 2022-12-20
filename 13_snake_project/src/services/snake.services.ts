@@ -27,11 +27,4 @@ export class SnakeService {
 		return this.snakeRepository.updateSnake(newSnake);
 	}
 
-	growSnake() {
-		return this.snakeRepository.growSnake();
-	}
-
-	dieSnake() {
-		return this.snakeRepository.dieSnake();
-	}
 }

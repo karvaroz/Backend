@@ -11,6 +11,4 @@ export interface SnakeRepository {
 	//  ): Promise<Snake>;
 	getSnakeById(snakeId: number): Promise<Snake | null>;
 	updateSnake(newSnake: Snake): Promise<Snake>;
-	growSnake(): void;
-	dieSnake(): void;
 }

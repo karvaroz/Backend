@@ -16,14 +16,8 @@ export class SnakeRouter extends BaseRouter<SnakeController> {
 		this.router.get("/snake/read", (req, res) =>
 			this.controller.getSnakeById(req, res)
 		);
-		this.router.put("/snake/update/:id", (req, res) =>
+		this.router.post("/snake/update", (req, res) =>
 			this.controller.updateSnake(req, res)
-		);
-		this.router.post("/snake/grow/:id", (req, res) =>
-			this.controller.growSnake(req, res)
-		);
-		this.router.post("snake/die/:id", (req, res) =>
-			this.controller.dieSnake(req, res)
 		);
 	}
 }

@@ -1,6 +1,5 @@
 import { injectable } from "inversify";
 import { Snake } from "../../../domain/entities/snake.domain";
-import { DirectionType } from "../../../domain/enums/directionType";
 import { SnakeRepository } from "../../../domain/repository/snake.repository";
 import { AppDataSource } from "../app.dbsource";
 import SnakeEntity from "./snake.entity";
@@ -27,12 +26,5 @@ export default class SnakeDatabase implements SnakeRepository {
 		const repository = AppDataSource.getRepository(SnakeEntity);
 		return await repository.save(newSnake);
 	}
-	growSnake(): void {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		console.log("GROW");
-	}
-	dieSnake(): void {
-		const repository = AppDataSource.getRepository(SnakeEntity);
-		console.log("Die");
-	}
+
 }
