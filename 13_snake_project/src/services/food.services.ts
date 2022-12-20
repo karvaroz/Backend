@@ -19,10 +19,6 @@ export class FoodService {
 		return await this.foodRepository.getFoodById(id);
 	}
 
-	async updateFood(food: Food) {
-		return await this.foodRepository.updateFood(food);
-	}
-
 	async deleteFood(id: number) {
 		return await this.foodRepository.deleteFood(id);
 	}

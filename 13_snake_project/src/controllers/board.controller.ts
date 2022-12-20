@@ -6,6 +6,7 @@ import { BoardService } from "../services/board.services";
 
 export class BoardController {
 	boardCreationService = container.get<BoardService>(BOARDSERVICE);
+	
 	async createBoard(req: Request, res: Response) {
 		try {
 			const board = {
