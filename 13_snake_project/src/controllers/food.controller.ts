@@ -24,7 +24,15 @@ export class FoodController {
 		}
 	}
 
-	async getFoodById(req: Request, res: Response) {}
+	async getFoodById(req: Request, res: Response) {
+		try {
+			const foodId = parseInt(req.body.idFood)
+			const getFood = await this.foodCreationService.getFoodById(foodId)
+			res.status(200).send(getFood);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
+	}
 
 	async deleteFood(req: Request, res: Response) {
 		try {

@@ -10,7 +10,7 @@ export class FoodRouter extends BaseRouter<FoodController> {
 		this.router.post("/food/create", (req, res) =>
 			this.controller.generateFood(req, res)
 		);
-		this.router.post("/food/read", (req, res) =>
+		this.router.get("/food/read", (req, res) =>
 			this.controller.getFoodById(req, res)
 		);
 		this.router.delete("/food/delete", (req, res) =>
