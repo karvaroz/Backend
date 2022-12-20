@@ -1,18 +1,21 @@
 {
 	"compilerOptions": {
-		"lib": ["es2020", "dom"],
 		"module": "commonjs",
+		// "strictNullChecks": true,
 		"esModuleInterop": true,
-		"target": "ES2020",
-		"strict": true,
+		"target": "es2020",
 		"moduleResolution": "node",
 		"sourceMap": true,
-		"outDir": "dist",
-		"noImplicitAny": true,
-		"strictBindCallApply": true,
-		"emitDecoratorMetadata": true,
+		"outDir": "./dist",
 		"experimentalDecorators": true,
-		"types": ["reflect-metadata", "node"]
+		"emitDecoratorMetadata": true,
+		"removeComments": true,
+		"incremental": true,
+		"noImplicitAny": true,
+		"types": ["reflect-metadata", "jest", "@types/jest", "ts-jest", "node"],
+		"lib": ["es2020", "DOM"],
+		"resolveJsonModule": true
 	},
-	"include": ["src"]
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist"]
 }

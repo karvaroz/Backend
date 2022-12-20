@@ -15,7 +15,10 @@ export class BoardController {
 				height: parseInt(req.body.height),
 			};
 			const newBoard = await this.boardCreationService.createBoard(board);
-			res.status(200).send(newBoard);
+			res.status(200).send({
+				message: newBoard,
+				board: Array(req.body.width).fill(".".repeat(req.body.width))
+			});
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
@@ -34,7 +37,9 @@ export class BoardController {
 	async modifyBoard(req: Request, res: Response) {
 		try {
 			const boardId = parseInt(req.body.boardId);
-			const boardToUpdate = await this.boardCreationService.getBoardById(boardId);
+			const boardToUpdate = await this.boardCreationService.getBoardById(
+				boardId
+			);
 			if (boardToUpdate) {
 				boardToUpdate.height = parseInt(req.body.height);
 				boardToUpdate.width = parseInt(req.body.width);
