@@ -24,14 +24,14 @@ class ServerApp {
 		this.app.use("/api", this.routers());
 		this.listen();
 	}
-	
+
 	routers(): Array<express.Router> {
 		return [
 			new SnakeRouter().router,
 			new PlayerRouter().router,
 			new BoardRouter().router,
 			new GameRouter().router,
-			new FoodRouter().router
+			new FoodRouter().router,
 		];
 	}
 
@@ -48,7 +48,12 @@ class ServerApp {
 		this.app.listen(this.port, () => {
 			console.log("listening on port " + this.port);
 		});
+			
 	}
+
+
 }
+
+
 
 new ServerApp();

@@ -51,12 +51,4 @@ export class GameService {
 		return await this.gameRepository.setGameStatus(gameId, game);
 	}
 
-	timerExecuteAction(action: () => void, interval: number, stop: number) {
-		let timesToExecute = 0;
-		const intervalId = setInterval(action, interval);
-		if (timesToExecute <= stop) {
-			return timesToExecute++;
-		}
-		return clearInterval(intervalId);
-	}
 }
