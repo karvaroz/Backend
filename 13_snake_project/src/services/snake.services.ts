@@ -15,19 +15,11 @@ export class SnakeService {
 		return await this.snakeRepository.createSnake(snake);
 	}
 
-	async moveSnake(snake: Snake, stepsToMove: number) {
-		return await this.snakeRepository.moveSnake(snake, stepsToMove);
-	}
-
 	async getSnakeById(id: number) {
 		return this.snakeRepository.getSnakeById(id);
 	}
 
-	async updateSnake(newSnake: Snake) {
-		return this.snakeRepository.updateSnake(newSnake);
-	}
-
-	async eatSnake(snakeId: number, snakeLength: number, snake: Snake) {
-		return this.snakeRepository.eatSnake(snakeId, snakeLength, snake);
+	async updateSnake(snakeId: number, infoUpdate: Snake) {
+		return this.snakeRepository.updateSnake(snakeId, infoUpdate);
 	}
 }

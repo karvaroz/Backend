@@ -1,9 +1,8 @@
 import { Snake } from "../entities/snake.domain";
+import { UpdateResult } from 'typeorm';
 
 export interface SnakeRepository {
 	createSnake(snake: Snake): Promise<Snake>;
-	moveSnake(snake: Snake, stepsToMove: number): Promise<Snake>;
 	getSnakeById(snakeId: number): Promise<Snake>;
-	updateSnake(newSnake: Snake): Promise<Snake>;
-	eatSnake(snakeId: number, snakeLength: number, snake: Snake): Promise<Snake>;
+	updateSnake(snakeId: number, infoUpdate: Snake): Promise<UpdateResult>;
 }

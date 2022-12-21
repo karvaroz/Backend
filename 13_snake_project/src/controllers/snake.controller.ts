@@ -26,33 +26,13 @@ export class SnakeController {
 		}
 	}
 
-	async moveSnake(req: Request, res: Response) {
-		try {
-			const snakeId = parseInt(req.body.snakeId);
-			const snake = await this.snakeCreationService.getSnakeById(snakeId);
-
-			if (snake) {
-				
-				snake.snakeDirection = req.body.nextMove.toString();
-				const updateSnakePosition = await this.snakeCreationService.updateSnake(
-					snake
-				);
-				const snakePosition = await this.snakeCreationService.moveSnake(
-					updateSnakePosition,
-					parseInt(req.body.stepsToMove)
-				);
-				res.status(200).send(updateSnakePosition);
-			}
-		} catch (error) {
-			res.status(500).send({ error: error });
-		}
-	}
-
 	async getSnakeById(req: Request, res: Response) {
 		try {
-			const snakeId = parseInt(req.body.snakeId);
-			const getSnakeId = await this.snakeCreationService.getSnakeById(snakeId);
-			res.status(200).send(getSnakeId);
+			const { snakeId } = req.params;
+			const snake = await this.snakeCreationService.getSnakeById(
+				parseInt(snakeId)
+			);
+			res.status(200).send(snake);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
@@ -60,34 +40,15 @@ export class SnakeController {
 
 	async updateSnake(req: Request, res: Response) {
 		try {
-			const snakeId = parseInt(req.body.snakeId);
-			const snakeToUpdate = await this.snakeCreationService.getSnakeById(
-				snakeId
+			const { snakeId } = req.params;
+			const snakeUpdated = await this.snakeCreationService.updateSnake(
+				parseInt(snakeId),
+				req.body
 			);
-			if (snakeToUpdate) {
-				snakeToUpdate.snakeLength = parseInt(req.body.snakeLength);
-				snakeToUpdate.snakePositionX = parseInt(req.body.snakePositionX);
-				snakeToUpdate.snakePositionY = parseInt(req.body.snakePositionY);
-				snakeToUpdate.snakeDirection = req.body.snakeDirection;
-				const snakeUpdated = await this.snakeCreationService.updateSnake(
-					snakeToUpdate
-				);
-				res.status(200).send(snakeUpdated);
-			}
-		} catch (error) {
-			res.status(500).send({ error: error });
-		}
-	}
-
-	async eatSnake(req: Request, res: Response) {
-		try {
-			const snakeId = parseInt(req.body.snakeId);
-			const snake = await this.snakeCreationService.getSnakeById(snakeId);
-			if (snake) {
-				snake.snakeLength += parseInt(req.body.extraPoints);
-				const snakeUpdated = await this.snakeCreationService.updateSnake(snake);
-				res.status(200).send(snakeUpdated);
-			}
+			res.status(200).send({
+				msg: "Successfully updated snake",
+				snakeUpdated,
+			});
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
