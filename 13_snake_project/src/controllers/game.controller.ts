@@ -26,29 +26,31 @@ export class GameController {
 		}
 	}
 
-	async restartGame(req: Request, res: Response) {
+	async updateGame(req: Request, res: Response) {
 		try {
 			const { gameId } = req.params;
-			const game = await this.gameCreationService.getGameById(parseInt(gameId));
-			const restart = await this.gameCreationService.restartGame(
+			const updateGame = await this.gameCreationService.updateGame(
 				parseInt(gameId),
-				game
+				req.body
 			);
-			res.status(200).send(restart);
+			res.status(200).send({
+				msg: "Successfully updated game",
+				updateGame,
+			});
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
 	}
 
-	async setGameStatus(req: Request, res: Response) {
+	async deleteGame(req: Request, res: Response) {
 		try {
 			const { gameId } = req.params;
-			const game = await this.gameCreationService.getGameById(parseInt(gameId));
-			const status = await this.gameCreationService.setGameStatus(
-				parseInt(gameId),
-				game
+			const deleteGame = await this.gameCreationService.deleteGame(
+				parseInt(gameId)
 			);
-			res.status(200).send(status);
+			res
+				.status(200)
+				.send(`ID GAME: ${deleteGame.affected} deleted successfully`);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

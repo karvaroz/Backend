@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
 import "reflect-metadata";
-
 import { container } from "../infrastructure/inversify/inversify.config";
 import { BOARDSERVICE } from "../infrastructure/inversify/types";
-
 import { BoardService } from "../services/board.services";
 
 export class BoardController {

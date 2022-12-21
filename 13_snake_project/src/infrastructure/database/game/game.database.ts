@@ -1,4 +1,5 @@
 import { injectable } from "inversify";
+import { UpdateResult, DeleteResult } from "typeorm";
 import { Game } from "../../../domain/entities/game.domain";
 import { GameRepository } from "../../../domain/repository/game.repository";
 import { AppDataSource } from "../app.dbsource";
@@ -10,21 +11,17 @@ export default class GameDatabase implements GameRepository {
 		const repository = AppDataSource.getRepository(GameEntity);
 		return await repository.save(game);
 	}
-
 	async getGameById(gameId: number): Promise<Game> {
 		const repository = AppDataSource.getRepository(GameEntity);
 		const result = await repository.findOneBy({ gameId });
-		return result
+		return result;
 	}
-
-	async restartGame(gameId: number, game: Game): Promise<Game> {
+	async updateGame(gameId: number, infoUpdate: Game): Promise<UpdateResult> {
 		const repository = AppDataSource.getRepository(GameEntity);
-		return await repository.save(game);
+		return await repository.update(gameId, infoUpdate);
 	}
-
-	async setGameStatus(gameId: number, game: Game): Promise<Game> {
+	async deleteGame(gameId: number): Promise<DeleteResult> {
 		const repository = AppDataSource.getRepository(GameEntity);
-		return await repository.save(game);
+		return await repository.delete({ gameId });
 	}
 }
-

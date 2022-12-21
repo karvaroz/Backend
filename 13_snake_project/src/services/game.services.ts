@@ -43,12 +43,11 @@ export class GameService {
 		return await this.gameRepository.getGameById(gameId);
 	}
 
-	async restartGame(gameId: number, game: Game) {
-		return await this.gameRepository.restartGame(gameId, game);
+	async updateGame(gameId: number, infoUpdate: Game) {
+		return await this.gameRepository.updateGame(gameId, infoUpdate);
 	}
 
-	async setGameStatus(gameId: number, game: Game) {
-		return await this.gameRepository.setGameStatus(gameId, game);
+	async deleteGame(gameId: number) {
+		return await this.gameRepository.deleteGame(gameId);
 	}
-
 }

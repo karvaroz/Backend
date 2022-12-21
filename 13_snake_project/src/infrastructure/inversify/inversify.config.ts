@@ -7,7 +7,6 @@ import { SnakeRepository } from "../../domain/repository/snake.repository";
 import { GameRepository } from "../../domain/repository/game.repository";
 import { FoodRepository } from "../../domain/repository/food.repository";
 
-
 import { BoardService } from "../../services/board.services";
 import { PlayerService } from "../../services/player.services";
 import { GameService } from "../../services/game.services";

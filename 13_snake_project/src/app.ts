@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+
 import { SnakeRouter } from "./router/snake.routes";
 import { AppDataSource } from "./infrastructure/database/app.dbsource";
 import { PlayerRouter } from "./router/player.routes";
@@ -50,7 +51,6 @@ class ServerApp {
 		});
 			
 	}
-
 
 }
 

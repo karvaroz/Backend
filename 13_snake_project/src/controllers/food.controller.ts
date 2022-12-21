@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
 import "reflect-metadata";
-
 import { Food } from "../domain/entities/food.domain";
 import { container } from "../infrastructure/inversify/inversify.config";
-
 import { FOODSERVICE } from "../infrastructure/inversify/types";
 import { FoodService } from "../services/food.services";
 

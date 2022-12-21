@@ -1,8 +1,9 @@
 import { Game } from "../entities/game.domain";
+import { UpdateResult, DeleteResult } from 'typeorm';
 
 export interface GameRepository {
 	createGame(game: Game): Promise<Game>;
 	getGameById(gameId: number): Promise<Game>;
-	restartGame(gameId: number, game: Game): Promise<Game>;
-	setGameStatus(gameId: number, game: Game): Promise<Game>;
+	updateGame(gameId: number, infoUpdate: Game): Promise<UpdateResult>;
+	deleteGame(gameId: number): Promise<DeleteResult>;
 }

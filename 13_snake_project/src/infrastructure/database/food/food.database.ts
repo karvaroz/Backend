@@ -1,9 +1,7 @@
 import { injectable } from "inversify";
 import { DeleteResult } from "typeorm";
-
 import { Food } from "../../../domain/entities/food.domain";
 import { FoodRepository } from "../../../domain/repository/food.repository";
-
 import { AppDataSource } from "../app.dbsource";
 import FoodEntity from "./food.entity";
 
