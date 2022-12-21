@@ -25,7 +25,10 @@ export class BoardController {
 			const board = await this.boardCreationService.getBoardById(
 				parseInt(boardId)
 			);
-			res.status(200).send(board);
+			res.status(200).send({
+				board,
+				boardTable: Array(board.boardSize).fill(".".repeat(board.boardSize)),
+			});
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

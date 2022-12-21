@@ -63,7 +63,20 @@ export class GameController {
 		try {
 			const { gameId } = req.params;
 			const game = await this.gameCreationService.getGameById(parseInt(gameId));
-			res.status(200).send(game);
+			const gameScore = await this.playerCreationService.getPlayerById(
+				game.playerId
+			);
+			const gameBoard = await this.boardCreationService.getBoardById(game.boardId)
+			const gameSnake = await this.snakeCreationService.getSnakeById(game.snakeId)
+			res.status(200).send({
+				game,
+				gameScore,
+				gameBoard,
+				gameSnake,
+				boardTable: Array(gameBoard.boardSize).fill(
+					".".repeat(gameBoard.boardSize)
+				),
+			});
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
@@ -103,9 +116,8 @@ export class GameController {
 		try {
 			const { gameId } = req.params;
 			const game = await this.gameCreationService.getGameById(parseInt(gameId));
-			const restart = await this.gameCreationService.restartGame(game);
+			await this.gameCreationService.restartGame(game);
 			res.status(200).send(`GAME restarted successfully`);
-			// res.status(200).send(restart);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

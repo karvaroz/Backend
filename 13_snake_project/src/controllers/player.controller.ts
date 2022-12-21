@@ -47,7 +47,10 @@ export class PlayerController {
 	async higherScore(req: Request, res: Response) {
 		try {
 			const getScores = await this.playerCreationService.higherScore();
-			res.status(200).send(getScores);
+			let scoreOrdered = getScores.sort((score1, score2) =>
+				score1.score < score2.score ? 1 : score1.score > score2.score ? -1 : 0
+			);
+			res.status(200).send(scoreOrdered);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
