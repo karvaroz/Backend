@@ -1,6 +1,8 @@
 import { inject, injectable } from "inversify";
+
 import { Food } from "../domain/entities/food.domain";
 import { FoodRepository } from "../domain/repository/food.repository";
+
 import { FOOD } from "../infrastructure/inversify/types";
 
 @injectable()
