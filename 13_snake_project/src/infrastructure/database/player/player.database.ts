@@ -1,26 +1,33 @@
 import { injectable } from "inversify";
+import { Player } from "../../../domain/entities/player.domain";
 import { PlayerRepository } from "../../../domain/repository/player.repository";
 import { AppDataSource } from "../app.dbsource";
+import { UpdateResult } from "typeorm";
 import PlayerEntity from "./player.entity";
 
 @injectable()
 export default class PlayerDatabase implements PlayerRepository {
-	async createPlayer(player: PlayerEntity): Promise<PlayerEntity> {
+	async createPlayer(player: Player): Promise<Player> {
 		const repository = AppDataSource.getRepository(PlayerEntity);
 		return await repository.save(player);
 	}
 
-	async getPlayerById(playerId: number): Promise<PlayerEntity> {
+	async getPlayerById(playerId: number): Promise<Player> {
 		const repository = AppDataSource.getRepository(PlayerEntity);
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const result = await repository.findOneBy({ playerId });
-		return result!
+		return result;
 	}
 
-	async updatePlayer(player: PlayerEntity): Promise<PlayerEntity> {
+	async updatePlayer(
+		playerId: number,
+		infoUpdate: Player
+	): Promise<UpdateResult> {
 		const repository = AppDataSource.getRepository(PlayerEntity);
-		return await repository.save(player);
+		return await repository.update(playerId, infoUpdate);
 	}
 
+	async higherScore(): Promise<Player[]> {
+		const repository = AppDataSource.getRepository(PlayerEntity);
+		return await repository.find();
+	}
 }
-

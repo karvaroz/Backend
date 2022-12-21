@@ -9,27 +9,47 @@ export class PlayerController {
 
 	async createPlayer(req: Request, res: Response) {
 		try {
-			const player = {
-				playerId: parseInt(req.body.playerId),
-				name: req.body.name.toString(),
-				score: parseInt(req.body.score),
-			};
-			const newPlayer = await this.playerCreationService.createPlayer(player);
+			const newPlayer = await this.playerCreationService.createPlayer(req.body);
 			res.status(200).send(newPlayer);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
 	}
-	
-	getPlayerById(req: Request, res: Response) {
-		res.status(200).json({
-			message: "TRAER PLAYER",
-		});
+
+	async getPlayerById(req: Request, res: Response) {
+		try {
+			const { playerId } = req.params;
+			const newPlayer = await this.playerCreationService.getPlayerById(
+				parseInt(playerId)
+			);
+			res.status(200).send(newPlayer);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
 	}
 
-	updatePlayer(req: Request, res: Response) {
-		res.status(200).json({
-			message: "ACTUALIZAR PLAYER",
-		});
+	async updatePlayer(req: Request, res: Response) {
+		try {
+			const { playerId } = req.params;
+			const updateScore = await this.playerCreationService.updatePlayer(
+				parseInt(playerId),
+				req.body
+			);
+			res.status(200).send({
+				msg: "Successfully updated player",
+				updateScore,
+			});
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
+	}
+
+	async higherScore(req: Request, res: Response) {
+		try {
+			const getScores = await this.playerCreationService.higherScore();
+			res.status(200).send(getScores);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
 	}
 }

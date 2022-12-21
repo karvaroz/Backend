@@ -10,13 +10,13 @@ export class GameRouter extends BaseRouter<GameController> {
 		this.router.post("/game/create", (req, res) =>
 			this.controller.createGame(req, res)
 		);
-		this.router.get("/game/read", (req, res) =>
+		this.router.get("/game/read/:gameId", (req, res) =>
 			this.controller.getGameById(req, res)
 		);
-		this.router.post("/game/restart", (req, res) =>
+		this.router.post("/game/restart/:gameId", (req, res) =>
 			this.controller.restartGame(req, res)
 		);
-		this.router.post("/game/status", (req, res) =>
+		this.router.put("/game/status/:gameId", (req, res) =>
 			this.controller.setGameStatus(req, res)
 		);
 	}

@@ -1,7 +1,9 @@
-import PlayerEntity from "../../infrastructure/database/player/player.entity";
+import { Player } from "../entities/player.domain";
+import { UpdateResult } from "typeorm";
 
 export interface PlayerRepository {
-	createPlayer(player: PlayerEntity): Promise<PlayerEntity>;
-	getPlayerById(playerId: number): Promise<PlayerEntity>;
-	updatePlayer(player: PlayerEntity): Promise<PlayerEntity>;
+	createPlayer(player: Player): Promise<Player>;
+	getPlayerById(playerId: number): Promise<Player>;
+	updatePlayer(playerId: number, infoUpdate: Player): Promise<UpdateResult>;
+	higherScore(): Promise<Player[]>;
 }

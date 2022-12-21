@@ -19,7 +19,11 @@ export class PlayerService {
 		return await this.playerRepository.getPlayerById(id);
 	}
 
-	async updatePlayer(player: Player) {
-		return await this.playerRepository.updatePlayer(player);
+	async updatePlayer(playerId: number, infoUpdate: Player) {
+		return await this.playerRepository.updatePlayer(playerId, infoUpdate);
+	}
+
+	async higherScore() {
+		return await this.playerRepository.higherScore();
 	}
 }

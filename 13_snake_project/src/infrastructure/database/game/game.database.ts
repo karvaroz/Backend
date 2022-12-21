@@ -13,9 +13,8 @@ export default class GameDatabase implements GameRepository {
 
 	async getGameById(gameId: number): Promise<Game> {
 		const repository = AppDataSource.getRepository(GameEntity);
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const result = await repository.findOneBy({ gameId });
-		return result!
+		return result
 	}
 
 	async restartGame(gameId: number, game: Game): Promise<Game> {
