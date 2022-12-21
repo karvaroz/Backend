@@ -32,7 +32,7 @@ export class GameController {
 	async createGame(req: Request, res: Response) {
 		try {
 			const board = await this.boardCreationService.createBoard(
-				new Board(1, req.body)
+				new Board(1, req.body.size)
 			);
 			const snake = await this.snakeCreationService.createSnake(
 				new Snake(1, 1, generateNumber(10), generateNumber(7), "UP")
@@ -94,6 +94,18 @@ export class GameController {
 			res
 				.status(200)
 				.send(`ID GAME: ${deleteGame.affected} deleted successfully`);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
+	}
+
+	async restartGame(req: Request, res: Response) {
+		try {
+			const { gameId } = req.params;
+			const game = await this.gameCreationService.getGameById(parseInt(gameId));
+			const restart = await this.gameCreationService.restartGame(game);
+			res.status(200).send(`GAME restarted successfully`);
+			// res.status(200).send(restart);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

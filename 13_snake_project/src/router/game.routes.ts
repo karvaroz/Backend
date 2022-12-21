@@ -19,5 +19,8 @@ export class GameRouter extends BaseRouter<GameController> {
 		this.router.delete("/game/delete/:gameId", (req, res) =>
 			this.controller.deleteGame(req, res)
 		);
+		this.router.get("/game/restart/:gameId", (req, res) =>
+			this.controller.restartGame(req, res)
+		);
 	}
 }
