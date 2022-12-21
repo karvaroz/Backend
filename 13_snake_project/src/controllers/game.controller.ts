@@ -31,11 +31,11 @@ export class GameController {
 
 	async createGame(req: Request, res: Response) {
 		try {
-			const board = await this.boardCreationService.createBoard({
-				boardId: 10,
-				width: 25,
-				height: 25,
-			});
+			// const board = await this.boardCreationService.createBoard({
+			// 	boardId: 10,
+			// 	width: 25,
+			// 	height: 25,
+			// });
 			const snake = await this.snakeCreationService.createSnake({
 				snakeId: 10,
 				snakeLength: 1,
@@ -58,12 +58,12 @@ export class GameController {
 				gameId: parseInt(req.body.gameId),
 				snakeId: snake.snakeId,
 				foodId: food.idFood,
-				boardId: board.boardId,
+				// boardId: board.boardId,
 				playerId: player.playerId,
 				gameStatus: req.body.gameStatus.toString(),
 			};
-			const newGame = await this.gameCreationService.createGame(game);
-			res.status(200).send(newGame);
+			// const newGame = await this.gameCreationService.createGame(game);
+			// res.status(200).send(newGame);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

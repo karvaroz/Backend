@@ -7,8 +7,5 @@ export default class BoardEntity implements Board {
 	boardId!: number;
 
 	@Column()
-	width!: number;
-
-	@Column()
-	height!: number;
+	boardSize!: number;
 }

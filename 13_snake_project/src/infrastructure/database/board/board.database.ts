@@ -3,6 +3,7 @@ import { injectable } from "inversify";
 import { AppDataSource } from "../app.dbsource";
 import BoardEntity from "./board.entity";
 import { Board } from "../../../domain/entities/board.domain";
+import { UpdateResult } from "typeorm";
 
 
 @injectable()
@@ -14,13 +15,12 @@ export default class BoardDatabase implements BoardRepository {
 
 	async getBoardById(boardId: number): Promise<Board> {
 		const repository = AppDataSource.getRepository(BoardEntity);
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const result = await repository.findOneBy({ boardId });
-		return result!
+		return result;
 	}
 
-	async modifyBoard(board: Board): Promise<Board> {
+	async modifyBoard(boardId: number, infoUpdate: Board): Promise<UpdateResult> {
 		const repository = AppDataSource.getRepository(BoardEntity);
-		return await repository.save(board);
+		return await repository.update(boardId, infoUpdate)
 	}
 }

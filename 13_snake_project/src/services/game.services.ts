@@ -50,4 +50,5 @@ export class GameService {
 	async setGameStatus(gameId: number, game: Game) {
 		return await this.gameRepository.setGameStatus(gameId, game);
 	}
+
 }

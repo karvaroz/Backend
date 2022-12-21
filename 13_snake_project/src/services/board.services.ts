@@ -19,9 +19,7 @@ export class BoardService {
 		return await this.boardRepository.getBoardById(id);
 	}
 
-	async modifyBoard(board: Board) {
-		return await this.boardRepository.modifyBoard(board);
+	async modifyBoard(boardId: number, infoUpdate: Board) {
+		return await this.boardRepository.modifyBoard(boardId, infoUpdate);
 	}
-
-
 }
