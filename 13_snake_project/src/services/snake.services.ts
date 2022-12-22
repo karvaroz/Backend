@@ -22,4 +22,11 @@ export class SnakeService {
 	async updateSnake(snakeId: number, infoUpdate: Snake) {
 		return this.snakeRepository.updateSnake(snakeId, infoUpdate);
 	}
+
+	async changeDirection(snakeId: number, direction: string) {
+		const snake = await this.snakeRepository.getSnakeById(snakeId);
+		snake.snakeDirection = direction;
+		await this.snakeRepository.updateSnake(snakeId, snake);
+		return snake;
+	}
 }

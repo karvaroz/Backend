@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import "reflect-metadata";
+import { Snake } from "../domain/entities/snake.domain";
 import { container } from "../infrastructure/inversify/inversify.config";
 import { SNAKESERVICE } from "../infrastructure/inversify/types";
 import { SnakeService } from "../services/snake.services";
@@ -49,6 +50,20 @@ export class SnakeController {
 				msg: "Successfully updated snake",
 				snakeUpdated,
 			});
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
+	}
+
+	async changeDirection(req: Request, res: Response) {
+		try {
+			const { snakeId } = req.params;
+			const { snakeDirection } = req.query;
+			const newSnakeDirection = await this.snakeCreationService.changeDirection(
+				parseInt(snakeId),
+				snakeDirection.toString()
+			);
+			res.status(200).send(newSnakeDirection);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

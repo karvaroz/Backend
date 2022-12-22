@@ -89,6 +89,9 @@ BUENAS PRACTICAS
 Horizontal
 Indentacion 
 
+TEAM RULES
+ERROR HANDLING
+
 
 
 
