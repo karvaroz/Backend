@@ -1,6 +1,9 @@
 export const SNAKE = Symbol("SNAKE");
 export const SNAKESERVICE = Symbol("SNAKESERVICE");
 
+export const SNAKEBODY = Symbol("SNAKEBODY");
+export const SNAKEBODYSERVICE = Symbol("SNAKEBODYSERVICE");
+
 export const BOARD = Symbol("BOARD");
 export const BOARDSERVICE = Symbol("BOARDSERVICE");
 

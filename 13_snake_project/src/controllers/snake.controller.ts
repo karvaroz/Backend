@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import "reflect-metadata";
-import { Snake } from "../domain/entities/snake.domain";
 import { container } from "../infrastructure/inversify/inversify.config";
 import { SNAKESERVICE } from "../infrastructure/inversify/types";
 import { SnakeService } from "../services/snake.services";

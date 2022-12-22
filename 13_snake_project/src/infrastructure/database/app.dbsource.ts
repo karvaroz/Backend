@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm";
+
 import BoardEntity from "./board/board.entity";
 import FoodEntity from "./food/food.entity";
 import GameEntity from "./game/game.entity";
@@ -10,7 +11,7 @@ export const AppDataSource = new DataSource({
 	database: "database.sqllite",
 	synchronize: true,
 	logging: false,
-	entities: [BoardEntity, PlayerEntity, SnakeEntity, GameEntity, FoodEntity],
+	entities: [BoardEntity, PlayerEntity, SnakeEntity, SnakeBodyEntity,GameEntity, FoodEntity],
 	migrations: [],
 	subscribers: [],
 });

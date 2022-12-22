@@ -67,12 +67,19 @@ export class GameService {
 		return;
 	}
 
+	async snakeEatFood() {
+		
+	}
+
+	async generateNewFood() { }
+	
+	async changeGameStatus(){}
+
 
 
 	// Eat food  => snake and food in the same position
 	// Delete food
 	// Create new food
-	// Increase snake lenght
 	// Snake and food in the same position => Game over
 	// A game has multiple players
 	// A game has multiple snakes

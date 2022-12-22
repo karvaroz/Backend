@@ -31,6 +31,10 @@ export class SnakeService {
 		return snake;
 	}
 
+	async moveSnakeAndBody() { }
+	
+	async moveSnakeNextPosition(){}
+
 	async moveSnake(boardSize: number, snakeId: number) {
 		const snake = await this.snakeRepository.getSnakeById(snakeId);
 		if (snake.snakeDirection == DirectionType.UP) {
@@ -51,7 +55,18 @@ export class SnakeService {
 
 	async growSnake(snakeId: number) {
 		const snake = await this.snakeRepository.getSnakeById(snakeId);
-		snake.snakeLength += 1
+		snake.snakeLength += 1;
 		return await this.snakeRepository.updateSnake(snakeId, snake);
 	}
+
+	async growSnakeAndBody() { }
+	
+
+	async createSnakeBody() { }
+	
+	async getSnakeBodyById() { }
+	
+	async moveSnakeBody() { }
+	
+	async checkSnakeCollision() { }
 }
