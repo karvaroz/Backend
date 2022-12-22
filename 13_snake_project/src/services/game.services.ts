@@ -67,9 +67,8 @@ export class GameService {
 		return;
 	}
 
-	// Display snake on board
-	// Display food on board
-	// Move snake
+
+
 	// Eat food  => snake and food in the same position
 	// Delete food
 	// Create new food

@@ -68,4 +68,29 @@ export class SnakeController {
 			res.status(500).send({ error: error });
 		}
 	}
+
+	async moveSnake(req: Request, res: Response) {
+		try {
+			const { snakeId, boardSize } = req.params;
+			const moveSnakeTo = await this.snakeCreationService.moveSnake(
+				parseInt(boardSize),
+				parseInt(snakeId)
+			);
+			res.status(200).send(moveSnakeTo);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
+	}
+
+	async growSnake(req: Request, res: Response) {
+		try {
+			const { snakeId } = req.params;
+			const snake = await this.snakeCreationService.growSnake(
+				parseInt(snakeId)
+			);
+			res.status(200).send(`Snake ID: ${snakeId} grew +1`);
+		} catch (error) {
+			res.status(500).send({ error: error });
+		}
+	}
 }
