@@ -2,8 +2,8 @@ import { SnakeBody } from '../entities/snakebody.domain';
 import { UpdateResult, DeleteResult } from 'typeorm';
 
 export interface SnakeBodyRepository {
-	createSnakeFullBody(snakeId: number, snakeBody: SnakeBody): Promise<SnakeBody>;
-	getSnakeBodyById(snakeId: number): Promise<SnakeBody[]>;
-	updateSnakeBody(snakeId: number, snakeBody: SnakeBody): Promise<UpdateResult>;
-	deleteSnakeBody(snakeId: number): Promise<DeleteResult>;
+	createSnakeFullBody(snakeBody: SnakeBody): Promise<SnakeBody>;
+	getSnakeBodyById(snakeBodyId: number): Promise<SnakeBody[]>;
+	updateSnakeBody(snakeBodyId: number, updateInfo: SnakeBody): Promise<UpdateResult>;
+	deleteSnakeBody(snakeBodyId: number): Promise<DeleteResult>;
 }
