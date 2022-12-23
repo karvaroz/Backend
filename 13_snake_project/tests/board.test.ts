@@ -1,41 +1,41 @@
-// import { Board } from "../src/domain/entities/board.domain";
-// import { AppDataSource } from "../src/infrastructure/database/app.dbsource";
-// import BoardDatabase from "../src/infrastructure/database/board/board.database";
-// import BoardEntity from "../src/infrastructure/database/board/board.entity";
+import "reflect-metadata";
+import { Board } from "../src/domain/entities/board.domain";
+import { AppDataSource } from "../src/infrastructure/database/app.dbsource";
+import { container } from "../src/infrastructure/inversify/inversify.config";
+import { BOARDSERVICE } from "../src/infrastructure/inversify/types";
+import { BoardService } from "../src/services/board.services";
+import { UpdateResult } from "typeorm";
 
-// describe("BOARD TESTS", () => {
-// 	beforeAll(async () => {
-// 		await AppDataSource.initialize();
-// 	});
+describe("BOARD SERVICE", () => {
+	const boardService = container.get<BoardService>(BOARDSERVICE);
 
-// 	it("should create a board", async () => {
-// 		const boardAccess = new BoardDatabase();
-// 		const boardDB = new BoardEntity();
+	let boardTest: Board;
 
-// 		boardDB.boardId = 1;
-// 		boardDB.boardSize = 10;
+	beforeAll(async () => {
+		await AppDataSource.initialize();
+		boardTest = await boardService.createBoard(new Board(1, 10));
+	});
 
-// 		const createBoard = await boardAccess.createBoard(boardDB);
-// 		expect(createBoard).not.toBeNull();
-// 		expect(createBoard.boardId).toEqual(1);
-// 	});
+	// afterAll(async () => {
+	// 	await AppDataSource.dropDatabase();
+	// 	await AppDataSource.destroy();
+	// });
 
-// 	it("should get a board by id", async () => {
-// 		const boardAccess = new BoardDatabase();
-// 		const boardById = await boardAccess.getBoardById(1);
-// 		expect(boardById).not.toBeNull();
-// 		expect(boardById.boardId).toEqual(1);
-// 	});
+	it("SHOULD CREATE A BOARD ENTITY", async () => {
+		await boardService.createBoard(new Board(1, 10)).then((res) => {
+			expect(res instanceof Board).toBeTruthy();
+		});
+	});
 
-// 	it("should update a board", async () => {
-// 		const infoUpdate: Board = {
-// 			boardId: 1,
-// 			boardSize: 20,
-// 		};
-// 		const boardAccess = new BoardDatabase();
-// 		const boardUpdate = await boardAccess.modifyBoard(1, infoUpdate);
+	it("SHOULD READ A BOARD BY ITS ID", async () => {
+		await boardService.getBoardById(boardTest.boardId).then((res) => {
+			expect(res.boardId).toEqual(1);
+		});
+	});
 
-// 		expect(boardUpdate).not.toBeNull();
-// 	});
-// });
-
+	it("SHOULD READ A BOARD BY ITS ID", async () => {
+		await boardService.modifyBoard(boardTest.boardId, boardTest).then((res) => {
+			expect(res).toBeInstanceOf(UpdateResult);
+		});
+	});
+});

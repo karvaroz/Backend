@@ -5,7 +5,6 @@ import FoodEntity from "./food/food.entity";
 import GameEntity from "./game/game.entity";
 import PlayerEntity from "./player/player.entity";
 import SnakeEntity from "./snake/snake.entity";
-import SnakeBodyEntity from "./snakeBody/snakeBody.entity";
 
 export const AppDataSource = new DataSource({
 	type: "sqlite",
@@ -16,7 +15,6 @@ export const AppDataSource = new DataSource({
 		BoardEntity,
 		PlayerEntity,
 		SnakeEntity,
-		SnakeBodyEntity,
 		GameEntity,
 		FoodEntity,
 	],

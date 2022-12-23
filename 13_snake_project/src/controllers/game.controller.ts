@@ -35,10 +35,20 @@ export class GameController {
 				new Board(1, req.body.size)
 			);
 			const snake = await this.snakeCreationService.createSnake(
-				new Snake(1, 1, generateNumber(10), generateNumber(7), "UP")
+				new Snake(
+					1,
+					1,
+					generateNumber(4),
+					generateNumber(req.body.size),
+					"UP"
+				)
 			);
 			const food = await this.foodCreationService.generateFood(
-				new Food(1, generateNumber(5), generateNumber(7))
+				new Food(
+					1,
+					generateNumber(req.body.size),
+					generateNumber(2)
+				)
 			);
 			const player = await this.playerCreationService.createPlayer(
 				new Player(1, "name", 0)
@@ -68,15 +78,20 @@ export class GameController {
 			);
 			const gameBoard = await this.boardCreationService.getBoardById(game.boardId)
 			const gameSnake = await this.snakeCreationService.getSnakeById(game.snakeId)
+			const gameFood = await this.foodCreationService.getFoodById(game.foodId)
+			
+			const isSnakeInFoodPosition = await this.gameCreationService.snakeEatFood(
+				parseInt(gameId)
+			);
 			res.status(200).send({
 				game,
 				gameScore,
 				gameBoard,
+				gameFood,
 				gameSnake,
-				boardTable: Array(gameBoard.boardSize).fill(
-					".".repeat(gameBoard.boardSize)
-				),
+				isSnakeInFoodPosition,
 			});
+
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

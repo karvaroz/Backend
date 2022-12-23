@@ -70,9 +70,9 @@ export class SnakeController {
 
 	async moveSnake(req: Request, res: Response) {
 		try {
-			const { snakeId, boardSize } = req.params;
+			const { snakeId } = req.params;
 			const moveSnakeTo = await this.snakeCreationService.moveSnake(
-				parseInt(boardSize),
+				parseInt(req.body.boardSize),
 				parseInt(snakeId)
 			);
 			res.status(200).send(moveSnakeTo);

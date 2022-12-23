@@ -15,11 +15,15 @@ export class FoodService {
 		return await this.foodRepository.generateFood(food);
 	}
 
-	async getFoodById(id: number) {
-		return await this.foodRepository.getFoodById(id);
+	async getFoodById(idFood: number) {
+		return await this.foodRepository.getFoodById(idFood);
 	}
 
-	async deleteFood(id: number) {
-		return await this.foodRepository.deleteFood(id);
+	async deleteFood(idFood: number) {
+		return await this.foodRepository.deleteFood(idFood);
+	}
+
+	async updateFood(idFood: number, infoUpdate: Food) {
+		return await this.foodRepository.updateFood(idFood, infoUpdate)
 	}
 }

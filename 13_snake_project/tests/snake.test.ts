@@ -1,57 +1,51 @@
-// import { AppDataSource } from "../src/infrastructure/database/app.dbsource";
-// import SnakeEntity from "../src/infrastructure/database/snake/snake.entity";
-// import SnakeDatabase from "../src/infrastructure/database/snake/snake.database";
+import { Snake } from "../src/domain/entities/snake.domain";
+import { AppDataSource } from "../src/infrastructure/database/app.dbsource";
+import { container } from "../src/infrastructure/inversify/inversify.config";
+import { SNAKESERVICE } from "../src/infrastructure/inversify/types";
+import { SnakeService } from "../src/services/snake.services";
 
-// describe("SNAKE SERVICE TESTS", () => {
-// 	beforeAll(async () => {
-// 		await AppDataSource.initialize();
-// 	});
+describe("SNAKE SERVICE", () => {
+	const snakeService = container.get<SnakeService>(SNAKESERVICE);
 
-// 	it("should create a snake", async () => {
-// 		const snakeAccess = new SnakeDatabase();
-// 		const snakeDB = new SnakeEntity();
-// 		snakeDB.snakeId = 1;
-// 		snakeDB.snakeLength = 10;
-// 		snakeDB.snakePositionX = 10;
-// 		snakeDB.snakePositionY = 10;
-// 		snakeDB.snakeDirection = "LEFT";
-// 		const createSnake = await snakeAccess.createSnake(snakeDB);
-// 		expect(createSnake).not.toBeNull();
-// 		expect(createSnake.snakeId).toEqual(1);
-// 	});
+	let snakeTest: Snake;
 
-// 	it("should read read snake by ID", async () => {
-// 		const snakeAccess = new SnakeDatabase();
-// 		const snakeById = await snakeAccess.getSnakeById(1);
-// 		expect(snakeById).not.toBeNull();
-// 		expect(snakeById.snakeLength).toEqual(10);
-// 	});
+	beforeAll(async () => {
+		await AppDataSource.initialize();
+		snakeTest = await snakeService.createSnake(new Snake(1, 1, 1, 1, "UP"));
+	});
 
-// 	it("should update a snake", async () => {
-// 		const snakeAccess = new SnakeDatabase();
-// 		const getSnakeToUpdate = await snakeAccess.getSnakeById(1);
+	it("SHOULD CREATE A SNAKE ENTITY", async () => {
+		await snakeService
+			.createSnake(new Snake(1, 1, 1, 1, "UP"))
+			.then(async (res) => {
+				expect(res instanceof Snake).toBeTruthy();
+			});
+	});
 
-// 		getSnakeToUpdate.snakeLength = 50;
+	it("SHOULD CREATE A SNAKE ENTITY", async () => {
+		await snakeService.getSnakeById(snakeTest.snakeId).then(async (res) => {
+			expect(res.snakeId).toEqual(snakeTest.snakeId);
+		});
+	});
 
-// 		expect(getSnakeToUpdate).not.toBeNull();
-// 		expect(getSnakeToUpdate.snakeLength).toEqual(50);
-// 	});
+	it("SHOULD UPDATE A SNAKE ENTITY", async () => {
+		await snakeService
+			.updateSnake(snakeTest.snakeId, snakeTest)
+			.then(async (res) => {
+				expect(res).toEqual({ affected: 1, generatedMaps: [], raw: [] });
+			});
+	});
 
-// 	it("should be able to increase snake's lenght after it eats", async () => {
-// 		const snakeAccess = new SnakeDatabase();
-// 		const snake = await snakeAccess.getSnakeById(1);
-
-// 		const pointsToEat: number = 10;
-// 		snake.snakeLength = snake.snakeLength + pointsToEat;
-
-// 		const updateSnake = await snakeAccess.updateSnake(snake);
-// 		const eatSnake = await snakeAccess.eatSnake(
-// 			snake.snakeId,
-// 			snake.snakeLength,
-// 			snake
-// 		);
-
-// 		expect(eatSnake).not.toBeNull();
-// 		//  expect(eatSnake.snakeLength).toEqual(snake.snakeLength + pointsToEat);
-// 	});
-// });
+	it("SHOULD GROW A SNAKE ENTITY", async () => {
+		await snakeService.growSnake(snakeTest.snakeId)
+			.then(async (res) => {
+			expect(res).toEqual({ affected: 1, generatedMaps: [], raw: [] });
+		});
+	});
+	it("SHOULD MOVE A SNAKE ENTITY", async () => {
+		await snakeService.moveSnake(5, snakeTest.snakeId)
+			.then(async (res) => {
+			expect(res).toEqual({ affected: 1, generatedMaps: [], raw: [] });
+		});
+	});
+});

@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { DeleteResult } from "typeorm";
+import { DeleteResult, UpdateResult } from "typeorm";
 import { Food } from "../../../domain/entities/food.domain";
 import { FoodRepository } from "../../../domain/repository/food.repository";
 import { AppDataSource } from "../app.dbsource";
@@ -7,7 +7,6 @@ import FoodEntity from "./food.entity";
 
 @injectable()
 export default class FoodDatabase implements FoodRepository {
-
 	async generateFood(food: Food): Promise<Food> {
 		const repository = AppDataSource.getRepository(FoodEntity);
 		return await repository.save(food);
@@ -15,12 +14,17 @@ export default class FoodDatabase implements FoodRepository {
 
 	async getFoodById(idFood: number): Promise<Food> {
 		const repository = AppDataSource.getRepository(FoodEntity);
-		const result =  await repository.findOneBy({ idFood });
-		return result
+		const result = await repository.findOneBy({ idFood });
+		return result;
 	}
 
 	async deleteFood(idFood: number): Promise<DeleteResult> {
 		const repository = AppDataSource.getRepository(FoodEntity);
 		return await repository.delete({ idFood });
+	}
+
+	async updateFood(idFood: number, infoUpdate: Food): Promise<UpdateResult> {
+		const repository = AppDataSource.getRepository(FoodEntity);
+		return await repository.update(idFood, infoUpdate);
 	}
 }

@@ -16,5 +16,8 @@ export class FoodRouter extends BaseRouter<FoodController> {
 		this.router.delete("/food/delete/:idFood", (req, res) =>
 			this.controller.deleteFood(req, res)
 		);
+		this.router.put("/food/update/:idFood", (req, res) =>
+			this.controller.updateFood(req, res)
+		);
 	}
 }

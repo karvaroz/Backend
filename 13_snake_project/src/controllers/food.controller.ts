@@ -51,4 +51,17 @@ export class FoodController {
 			res.status(500).send({ error: error });
 		}
 	}
+
+	async updateFood(req: Request, res: Response){
+		try {
+			const { idFood } = req.params;
+			const foodUpdate = await this.foodCreationService.updateFood(
+				parseInt(idFood),
+				req.body
+			);
+			res.status(200).send(foodUpdate);
+		} catch (error) {
+			
+		}
+	}
 }
