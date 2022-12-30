@@ -15,11 +15,11 @@ export class BoardService {
 		return await this.boardRepository.createBoard(board);
 	}
 
-	async getBoardById(id: number) {
-		return await this.boardRepository.getBoardById(id);
+	async getBoardById(boardId: number) {
+		return await this.boardRepository.getBoardById(boardId);
 	}
 
-	async modifyBoard(boardId: number, infoUpdate: Board) {
-		return await this.boardRepository.modifyBoard(boardId, infoUpdate);
+	async modifyBoard(board: Board) {
+		return await this.boardRepository.modifyBoard(board);
 	}
 }

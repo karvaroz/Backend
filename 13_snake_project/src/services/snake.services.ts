@@ -26,14 +26,14 @@ export class SnakeService {
 		return this.snakeRepository.getSnakeById(id);
 	}
 
-	async updateSnake(snakeId: number, infoUpdate: Snake) {
-		return this.snakeRepository.updateSnake(snakeId, infoUpdate);
+	async updateSnake(snake: Snake) {
+		return this.snakeRepository.updateSnake(snake);
 	}
 
 	async changeDirection(snakeId: number, direction: string) {
 		const snake = await this.snakeRepository.getSnakeById(snakeId);
 		snake.snakeDirection = direction;
-		await this.snakeRepository.updateSnake(snakeId, snake);
+		await this.snakeRepository.updateSnake(snake);
 		return snake;
 	}
 
@@ -42,7 +42,7 @@ export class SnakeService {
 		const limitBoard = (await this.boardRepository.getBoardById(snakeId))
 			.boardSize;
 		await this.moveSnake(limitBoard, snakeId);
-		return await this.updateSnake(snakeId, snake);
+		return await this.updateSnake(snake);
 	}
 
 	async moveSnake(boardSize: number, snakeId: number) {
@@ -60,12 +60,12 @@ export class SnakeService {
 			snake.snakePositionX =
 				snake.snakePositionX > 0 ? --snake.snakePositionX : boardSize;
 		}
-		return await this.snakeRepository.updateSnake(snake.snakeId, snake);
+		return await this.snakeRepository.updateSnake(snake);
 	}
 
 	async growSnake(snakeId: number) {
 		const snake = await this.snakeRepository.getSnakeById(snakeId);
-		snake.snakeLength = Number(snake.snakeLength + 1);
-		return await this.snakeRepository.updateSnake(snakeId, snake);
+		snake.snakeLength = snake.snakeLength + 1
+		return await this.snakeRepository.updateSnake(snake);
 	}
 }

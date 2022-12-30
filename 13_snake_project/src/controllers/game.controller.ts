@@ -35,20 +35,10 @@ export class GameController {
 				new Board(1, req.body.size)
 			);
 			const snake = await this.snakeCreationService.createSnake(
-				new Snake(
-					1,
-					1,
-					generateNumber(4),
-					generateNumber(req.body.size),
-					"UP"
-				)
+				new Snake(1, 1, generateNumber(4), generateNumber(req.body.size), "UP")
 			);
 			const food = await this.foodCreationService.generateFood(
-				new Food(
-					1,
-					generateNumber(req.body.size),
-					generateNumber(2)
-				)
+				new Food(1, generateNumber(req.body.size), generateNumber(2))
 			);
 			const player = await this.playerCreationService.createPlayer(
 				new Player(1, "name", 0)
@@ -76,10 +66,14 @@ export class GameController {
 			const gameScore = await this.playerCreationService.getPlayerById(
 				game.playerId
 			);
-			const gameBoard = await this.boardCreationService.getBoardById(game.boardId)
-			const gameSnake = await this.snakeCreationService.getSnakeById(game.snakeId)
-			const gameFood = await this.foodCreationService.getFoodById(game.foodId)
-			
+			const gameBoard = await this.boardCreationService.getBoardById(
+				game.boardId
+			);
+			const gameSnake = await this.snakeCreationService.getSnakeById(
+				game.snakeId
+			);
+			const gameFood = await this.foodCreationService.getFoodById(game.foodId);
+
 			const isSnakeInFoodPosition = await this.gameCreationService.snakeEatFood(
 				parseInt(gameId)
 			);
@@ -91,7 +85,6 @@ export class GameController {
 				gameSnake,
 				isSnakeInFoodPosition,
 			});
-
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
@@ -100,14 +93,10 @@ export class GameController {
 	async updateGame(req: Request, res: Response) {
 		try {
 			const { gameId } = req.params;
-			const updateGame = await this.gameCreationService.updateGame(
-				parseInt(gameId),
-				req.body
-			);
-			res.status(200).send({
-				msg: "Successfully updated game",
-				updateGame,
-			});
+			const game = await this.gameCreationService.getGameById(parseInt(gameId));
+			game.gameStatus = req.body.gameStatus;
+			await this.gameCreationService.createGame(game);
+			res.status(200).send(game);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
@@ -119,9 +108,7 @@ export class GameController {
 			const deleteGame = await this.gameCreationService.deleteGame(
 				parseInt(gameId)
 			);
-			res
-				.status(200)
-				.send(`ID GAME: ${deleteGame.affected} deleted successfully`);
+			res.status(200).send(deleteGame);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
@@ -132,7 +119,7 @@ export class GameController {
 			const { gameId } = req.params;
 			const game = await this.gameCreationService.getGameById(parseInt(gameId));
 			await this.gameCreationService.restartGame(game);
-			res.status(200).send(`GAME restarted successfully`);
+			res.status(200).send(game);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

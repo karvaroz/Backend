@@ -1,21 +1,23 @@
 import { Snake } from "../../../domain/entities/snake.domain";
-import { Column, PrimaryColumn, Entity } from "typeorm";
+import { Column, ObjectIdColumn, Entity, ObjectID } from "typeorm";
 
 @Entity()
 export default class SnakeEntity implements Snake {
+	@ObjectIdColumn()
+	id: ObjectID;
 
-	@PrimaryColumn()
+	@Column({ nullable: false, unique: true })
 	snakeId!: number;
 
-	@Column()
+	@Column({ nullable: false })
 	snakeLength!: number;
 
-	@Column()
+	@Column({ nullable: false })
 	snakePositionX!: number;
 
-	@Column()
+	@Column({ nullable: false })
 	snakePositionY!: number;
 
-	@Column()
+	@Column({ nullable: false })
 	snakeDirection!: string;
 }

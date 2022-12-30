@@ -41,14 +41,15 @@ export class SnakeController {
 	async updateSnake(req: Request, res: Response) {
 		try {
 			const { snakeId } = req.params;
-			const snakeUpdated = await this.snakeCreationService.updateSnake(
-				parseInt(snakeId),
-				req.body
+			const snake = await this.snakeCreationService.getSnakeById(
+				parseInt(snakeId)
 			);
-			res.status(200).send({
-				msg: "Successfully updated snake",
-				snakeUpdated,
-			});
+			snake.snakeLength = req.body.snakeLength;
+			snake.snakePositionX = generateNumber(parseInt(req.body.snakePositionX));
+			snake.snakePositionY = generateNumber(parseInt(req.body.snakePositionY));
+			snake.snakeDirection = req.body.snakeDirection.toString()
+			await this.snakeCreationService.createSnake(snake)
+			res.status(200).send(snake);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}
@@ -87,7 +88,7 @@ export class SnakeController {
 			const snake = await this.snakeCreationService.growSnake(
 				parseInt(snakeId)
 			);
-			res.status(200).send(`Snake ID: ${snakeId} grew +1`);
+			res.status(200).send(snake);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

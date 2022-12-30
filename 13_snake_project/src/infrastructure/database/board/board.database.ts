@@ -3,24 +3,26 @@ import { injectable } from "inversify";
 import { AppDataSource } from "../app.dbsource";
 import BoardEntity from "./board.entity";
 import { Board } from "../../../domain/entities/board.domain";
-import { UpdateResult } from "typeorm";
-
 
 @injectable()
 export default class BoardDatabase implements BoardRepository {
 	async createBoard(board: Board): Promise<Board> {
-		const repository = AppDataSource.getRepository(BoardEntity);
+		const repository = AppDataSource.getMongoRepository(BoardEntity);
 		return await repository.save(board);
 	}
 
 	async getBoardById(boardId: number): Promise<Board> {
-		const repository = AppDataSource.getRepository(BoardEntity);
-		const result = await repository.findOneBy({ boardId });
+		const repository = AppDataSource.getMongoRepository(BoardEntity);
+		const result = await repository.findOne({
+			where: {
+				boardId: boardId,
+			},
+		});
 		return result;
 	}
 
-	async modifyBoard(boardId: number, infoUpdate: Board): Promise<UpdateResult> {
-		const repository = AppDataSource.getRepository(BoardEntity);
-		return await repository.update(boardId, infoUpdate)
+	async modifyBoard(board: Board): Promise<Board> {
+		const repository = AppDataSource.getMongoRepository(BoardEntity);
+		return await repository.save(board);
 	}
 }

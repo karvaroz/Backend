@@ -1,14 +1,17 @@
-import { Column, PrimaryColumn, Entity } from "typeorm";
+import { Column, ObjectIdColumn, Entity, ObjectID } from "typeorm";
 import { Player } from "../../../domain/entities/player.domain";
 
 @Entity()
 export default class PlayerEntity implements Player {
-	@PrimaryColumn()
+	@ObjectIdColumn()
+	id: ObjectID;
+
+	@Column({ nullable: false, unique: true })
 	playerId!: number;
 
-	@Column()
+	@Column({ nullable: false })
 	name!: string;
 
-	@Column()
+	@Column({ nullable: false })
 	score!: number;
 }

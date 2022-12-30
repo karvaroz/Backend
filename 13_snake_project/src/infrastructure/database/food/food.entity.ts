@@ -1,14 +1,17 @@
-import { Column, PrimaryColumn, Entity } from "typeorm";
+import { Column, ObjectIdColumn, Entity, ObjectID } from "typeorm";
 import { Food } from "../../../domain/entities/food.domain";
 
 @Entity()
 export default class FoodEntity implements Food {
-	@PrimaryColumn()
+	@ObjectIdColumn()
+	id: ObjectID;
+
+	@Column({ nullable: false, unique: true })
 	idFood!: number;
 
-	@Column()
+	@Column({ nullable: false })
 	positionX!: number;
 
-	@Column()
+	@Column({ nullable: false })
 	positionY!: number;
 }

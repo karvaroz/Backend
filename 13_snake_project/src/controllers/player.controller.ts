@@ -31,14 +31,12 @@ export class PlayerController {
 	async updatePlayer(req: Request, res: Response) {
 		try {
 			const { playerId } = req.params;
-			const updateScore = await this.playerCreationService.updatePlayer(
-				parseInt(playerId),
-				req.body
+			const player = await this.playerCreationService.getPlayerById(
+				parseInt(playerId)
 			);
-			res.status(200).send({
-				msg: "Successfully updated player",
-				updateScore,
-			});
+			player.score = player.score + req.body.score;
+			await this.playerCreationService.createPlayer(player);
+			res.status(200).send(player);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

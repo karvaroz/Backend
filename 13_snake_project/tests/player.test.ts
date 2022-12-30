@@ -13,14 +13,14 @@ describe("PLAYER SERVICES", () => {
 
 	beforeAll(async () => {
 		await AppDataSource.initialize();
-		playerTest = await playerService.createPlayer(new Player(1, "PEDRO", 0));
-		playerTest3 = await playerService.createPlayer(new Player(3, "PEDRO", 0));
+		playerTest = await playerService.createPlayer(new Player(11, "PEDRO", 0));
+		playerTest3 = await playerService.createPlayer(new Player(31, "PEDRO", 0));
 	});
 
 
 	it("SHOULD CREATE AN PLAYER ENTITY", async () => {
 		const playerTest = await playerService
-			.createPlayer(new Player(1, "PEDRO", 0))
+			.createPlayer(new Player(10, "PEDRO", 0))
 			.then(async (res) => {
 				expect(res instanceof Player).toBeTruthy();
 			});
@@ -36,9 +36,9 @@ describe("PLAYER SERVICES", () => {
 
 	it("SHOULD UPDATE AN PLAYER ENTITY", async () => {
 		await playerService
-			.updatePlayer(playerTest3.playerId, playerTest3)
+			.updatePlayer(playerTest3)
 			.then(async (res) => {
-				expect(res).toEqual({ affected: 1, generatedMaps: [], raw: [] });
+				expect(res instanceof Player).toBeTruthy();
 			});
 	});
 });

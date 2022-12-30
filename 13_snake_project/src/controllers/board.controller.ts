@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import "reflect-metadata";
+import { Board } from "../domain/entities/board.domain";
 import { container } from "../infrastructure/inversify/inversify.config";
 import { BOARDSERVICE } from "../infrastructure/inversify/types";
 import { BoardService } from "../services/board.services";
@@ -37,14 +38,12 @@ export class BoardController {
 	async modifyBoard(req: Request, res: Response) {
 		try {
 			const { boardId } = req.params;
-			const data = await this.boardCreationService.modifyBoard(
-				parseInt(boardId),
-				req.body
+			const board = await this.boardCreationService.getBoardById(
+				parseInt(boardId)
 			);
-			res.status(200).send({
-				msg: "Successfully updated board",
-				data
-			});
+			board.boardSize = req.body.boardSize;
+			await this.boardCreationService.createBoard(board);
+			res.status(200).send(board);
 		} catch (error) {
 			res.status(500).send({ error: error });
 		}

@@ -1,5 +1,4 @@
 import { injectable } from "inversify";
-import { UpdateResult, DeleteResult } from "typeorm";
 import { Game } from "../../../domain/entities/game.domain";
 import { GameRepository } from "../../../domain/repository/game.repository";
 import { AppDataSource } from "../app.dbsource";
@@ -8,24 +7,30 @@ import GameEntity from "./game.entity";
 @injectable()
 export default class GameDatabase implements GameRepository {
 	async createGame(game: Game): Promise<Game> {
-		const repository = AppDataSource.getRepository(GameEntity);
+		const repository = AppDataSource.getMongoRepository(GameEntity);
 		return await repository.save(game);
 	}
 
 	async getGameById(gameId: number): Promise<Game> {
-		const repository = AppDataSource.getRepository(GameEntity);
-		const result = await repository.findOneBy({ gameId });
+		const repository = AppDataSource.getMongoRepository(GameEntity);
+		const result = await repository.findOne({
+			where: {
+				gameId: gameId,
+			},
+		});
 		return result;
 	}
 
-	async updateGame(gameId: number, infoUpdate: Game): Promise<UpdateResult> {
-		const repository = AppDataSource.getRepository(GameEntity);
-		return await repository.update(gameId, infoUpdate);
+	async updateGame(game: Game): Promise<Game> {
+		const repository = AppDataSource.getMongoRepository(GameEntity);
+		return await repository.save(game);
 	}
 
-	async deleteGame(gameId: number): Promise<DeleteResult> {
-		const repository = AppDataSource.getRepository(GameEntity);
-		return await repository.delete({ gameId });
+	async deleteGame(gameId: number): Promise<Boolean> {
+		const repository = AppDataSource.getMongoRepository(GameEntity);
+		if (await repository.delete({ gameId })) {
+			return true;
+		}
+		return false;
 	}
-
 }

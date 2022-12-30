@@ -55,8 +55,8 @@ export class GameService {
 		return await this.gameRepository.getGameById(gameId);
 	}
 
-	async updateGame(gameId: number, infoUpdate: Game) {
-		return await this.gameRepository.updateGame(gameId, infoUpdate);
+	async updateGame(game: Game) {
+		return await this.gameRepository.updateGame(game);
 	}
 
 	async deleteGame(gameId: number) {
@@ -67,27 +67,28 @@ export class GameService {
 		const food = await this.foodRepository.getFoodById(game.gameId);
 		food.positionX = generateNumber(4);
 		food.positionY = generateNumber(3);
-		await this.foodRepository.updateFood(game.gameId, food);
+		await this.foodRepository.updateFood(food);
 
 		const player = await this.playerRepository.getPlayerById(game.playerId);
-		await this.playerRepository.updatePlayer(game.playerId, player);
+		await this.playerRepository.updatePlayer(player);
 
 		const restartSnake = await this.snakeRepository.getSnakeById(game.snakeId);
 		restartSnake.snakeLength = 1;
 		restartSnake.snakePositionX = generateNumber(2);
 		restartSnake.snakePositionY = generateNumber(5);
+		await this.snakeRepository.updateSnake(restartSnake);
 
-		await this.snakeRepository.updateSnake(game.snakeId, restartSnake);
-		await this.changeGameStatus(game.gameId, "Ready to start");
-
-		return await this.gameRepository.updateGame(game.gameId, game);
+		game.gameStatus = "Ready to start";
+		return await this.gameRepository.updateGame(game);
 	}
 
 	async snakeEatFood(gameId: number) {
 		const game: Game = await this.gameRepository.getGameById(gameId);
 		const food: Food = await this.foodRepository.getFoodById(game.foodId);
 		const snake: Snake = await this.snakeRepository.getSnakeById(game.snakeId);
-		const player: Player = await this.playerRepository.getPlayerById(game.playerId);
+		const player: Player = await this.playerRepository.getPlayerById(
+			game.playerId
+		);
 
 		const sameX = snake.snakePositionX === food.positionX;
 		const sameY = snake.snakePositionY === food.positionY;
@@ -95,12 +96,20 @@ export class GameService {
 		if (sameX && sameY) {
 			await this.generateNewFood(gameId);
 
-			snake.snakeLength = Number(snake.snakeLength + 1);
-			await this.snakeRepository.updateSnake(snake.snakeId, snake);
+			snake.snakeLength = snake.snakeLength + 1;
+			snake.snakePositionX = generateNumber(3);
+			snake.snakePositionY = generateNumber(3);
+			await this.snakeRepository.updateSnake(snake);
 
-			player.score = Number(player.score + 1);
-			await this.playerRepository.updatePlayer(game.playerId, player);
-			
+			player.score = player.score + 1;
+			await this.playerRepository.updatePlayer(player);
+
+			food.positionX = generateNumber(1);
+			food.positionY = generateNumber(2)
+			await this.foodRepository.updateFood(food);	
+
+			await this.gameRepository.updateGame(game)
+
 			return true;
 		}
 		return false;
@@ -110,12 +119,12 @@ export class GameService {
 		const food = await this.foodRepository.getFoodById(idFood);
 		food.positionX = generateNumber(3);
 		food.positionY = generateNumber(2);
-		return await this.foodRepository.generateFood(food);
+		return await this.foodRepository.updateFood(food);
 	}
 
 	async changeGameStatus(gameId: number, status: string) {
 		const game = await this.gameRepository.getGameById(gameId);
 		game.gameStatus = status;
-		await this.gameRepository.updateGame(gameId, game);
+		await this.gameRepository.updateGame(game);
 	}
 }

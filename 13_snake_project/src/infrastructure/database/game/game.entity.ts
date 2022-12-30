@@ -1,23 +1,26 @@
-import { Column, PrimaryColumn, Entity } from "typeorm";
+import { Column, ObjectIdColumn, Entity, ObjectID } from "typeorm";
 import { Game } from "../../../domain/entities/game.domain";
 
 @Entity()
 export default class GameEntity implements Game {
-	@PrimaryColumn()
+	@ObjectIdColumn()
+	id: ObjectID;
+
+	@Column({ nullable: false, unique: true })
 	gameId!: number;
 
-	@Column()
+	@Column({ nullable: false, unique: true })
 	foodId!: number;
 
-	@Column()
+	@Column({ nullable: false, unique: true })
 	playerId!: number;
 
-	@Column()
+	@Column({ nullable: false})
 	gameStatus!: string;
 
-	@Column()
+	@Column({ nullable: false, unique: true })
 	snakeId!: number;
-	
-	@Column()
+
+	@Column({ nullable: false, unique: true })
 	boardId!: number;
 }

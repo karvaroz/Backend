@@ -4,7 +4,6 @@ import { AppDataSource } from "../src/infrastructure/database/app.dbsource";
 import { container } from "../src/infrastructure/inversify/inversify.config";
 import { BOARDSERVICE } from "../src/infrastructure/inversify/types";
 import { BoardService } from "../src/services/board.services";
-import { UpdateResult } from "typeorm";
 
 describe("BOARD SERVICE", () => {
 	const boardService = container.get<BoardService>(BOARDSERVICE);
@@ -13,16 +12,12 @@ describe("BOARD SERVICE", () => {
 
 	beforeAll(async () => {
 		await AppDataSource.initialize();
-		boardTest = await boardService.createBoard(new Board(1, 10));
+		boardTest = await boardService.createBoard(new Board(5, 10));
 	});
 
-	// afterAll(async () => {
-	// 	await AppDataSource.dropDatabase();
-	// 	await AppDataSource.destroy();
-	// });
 
 	it("SHOULD CREATE A BOARD ENTITY", async () => {
-		await boardService.createBoard(new Board(1, 10)).then((res) => {
+		await boardService.createBoard(new Board(6, 10)).then((res) => {
 			expect(res instanceof Board).toBeTruthy();
 		});
 	});
@@ -34,8 +29,8 @@ describe("BOARD SERVICE", () => {
 	});
 
 	it("SHOULD READ A BOARD BY ITS ID", async () => {
-		await boardService.modifyBoard(boardTest.boardId, boardTest).then((res) => {
-			expect(res).toBeInstanceOf(UpdateResult);
+		await boardService.modifyBoard(boardTest).then((res) => {
+			expect(res instanceof Board).toBeTruthy();
 		});
 	});
 });
