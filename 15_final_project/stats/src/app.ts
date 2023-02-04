@@ -1,28 +1,58 @@
-import express from 'express'
-import 'reflect-metadata'
-import amqp = require('amqplib/callback_api')
+import amqp = require("amqplib/callback_api");
 
-const app = express()
-const port = 3000
+amqp.connect(
+	{
+		protocol: "amqp",
+		hostname: "KARINA-LAPTOP",
+		port: 5672,
+		username: "admin",
+		password: "pass123",
+	},
+	function (error0, connection) {
+		if (error0) {
+			throw error0;
+		}
+		connection.createChannel(function (error1, channel) {
+			if (error1) {
+				throw error1;
+			}
 
-app.get('/', (req: any, res: any) => {
-  res.send('Hello World!')
-})
+			const queueDownloaderService = "Downloader Service";
+			const queueUploaderService = "Uploader Service";
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+			channel.assertQueue(queueDownloaderService, {
+				durable: false,
+			});
 
-amqp.connect({
-  protocol: 'amqp',
-  hostname: 'KARINA-LAPTOP',
-  port: 5672,
-  username: 'admin',
-  password: 'pass123'
-}, function (error0, connection) {
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (error0) {
-    throw error0
-  }
-  console.log(connection)
-})
+			channel.assertQueue(queueUploaderService, {
+				durable: false,
+			});
+
+			console.log(
+				" [*] Stats waiting for messages from:\n",
+        `${queueDownloaderService}\n`,
+        ` ${queueUploaderService}\n`
+			);
+
+			channel.consume(
+				queueDownloaderService,
+				function (msg) {
+					console.log(" [x] Received %s", msg?.content.toString());
+				},
+				{
+					noAck: true,
+				}
+			);
+
+			channel.consume(
+				queueUploaderService,
+				function (msg) {
+					console.log(" [x] Received %s", msg?.content.toString());
+				},
+				{
+					noAck: true,
+				}
+			);
+		});
+	}
+);
