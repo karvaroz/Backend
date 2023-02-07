@@ -1,4 +1,10 @@
 import amqp = require("amqplib/callback_api");
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+
+import { AppDataSource } from "./database/DBsource";
+import { UriRouter } from "./api/routes/uri.routes";
 
 amqp.connect(
 	{
@@ -36,3 +42,42 @@ amqp.connect(
 );
 
 // docker run -d -p 15672:15672 -p 5672:5672 --name rabbit rabbitmq:3-management
+
+class ServerApp {
+	public app: express.Application = express();
+	private port: number = 3000;
+
+	constructor() {
+		this.app.use(express.json());
+		this.app.use(express.urlencoded({ extended: false }));
+
+		this.dbConnect();
+
+		this.app.use(morgan("dev"));
+		this.app.use(cors());
+
+		this.app.use("/api", this.routers());
+		this.listen();
+	}
+
+	routers(): Array<express.Router> {
+		return [new UriRouter().router];
+	}
+
+	async dbConnect() {
+		try {
+			console.log("DB Connection succeeded");
+			return await AppDataSource.initialize();
+		} catch (error) {
+			return console.log("Error: " + error);
+		}
+	}
+
+	public listen() {
+		this.app.listen(this.port, () => {
+			console.log("Server listening on port " + this.port);
+		});
+	}
+}
+
+new ServerApp();
