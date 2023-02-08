@@ -4,8 +4,9 @@ import FileEntity from "../entities/file.entity";
 const repository = AppDataSource.getMongoRepository(FileEntity);
 
 export class FileRepository {
-	async createFile(file: FileEntity): Promise<FileEntity> {
-		return await repository.save(file);
+	async createFile(file: FileEntity) {
+		const fileCreated = await repository.save(file);
+		return fileCreated._id
 	}
 
 	async getAllFiles(): Promise<FileEntity[]> {

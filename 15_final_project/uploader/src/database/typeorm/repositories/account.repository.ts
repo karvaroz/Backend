@@ -4,11 +4,11 @@ import AccountEntity from "../entities/account.entity";
 const repository = AppDataSource.getMongoRepository(AccountEntity);
 
 export class AccountRepository {
-	async createAccount(account: AccountEntity): Promise<AccountEntity> {
+	async createAccount(account: AccountEntity) {
 		return await repository.save(account);
 	}
 
-	async getAllAccounts(): Promise<AccountEntity[]> {
+	async getAllAccounts() {
 		return await repository.find();
 	}
 

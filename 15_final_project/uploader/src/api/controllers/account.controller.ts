@@ -15,6 +15,7 @@ export class AccountController {
 			);
 			res.status(response.responseCode).json(response);
 		} catch (error) {
+			console.error(error);
 			const response = new ResponseMsg(500, "Could not create the account");
 			res.status(response.responseCode).json(response);
 		}

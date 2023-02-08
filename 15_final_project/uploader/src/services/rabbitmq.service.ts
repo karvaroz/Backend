@@ -32,10 +32,10 @@ export class RabbitMQService {
 				console.log(`"Sent to [${queueName}]: %s`, msg);
 			});
 
-			setTimeout(function () {
-				connection.close();
-				process.exit(0);
-			}, 500);
+			// setTimeout(function () {
+			// 	connection.close();
+			// 	process.exit(0);
+			// }, 500);
 		});
 	}
 

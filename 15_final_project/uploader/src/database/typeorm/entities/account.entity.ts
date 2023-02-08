@@ -6,9 +6,6 @@ export default class AccountEntity {
 	_id!: string;
 
 	@Column({ nullable: false })
-	email!: string;
-
-	@Column({ nullable: false })
 	clientId!: string;
 
 	@Column({ nullable: false })
@@ -18,5 +15,5 @@ export default class AccountEntity {
 	redirectUri!: string;
 
 	@Column({ nullable: false })
-	googleDriveKey!: string;
+	refreshToken!: string;
 }

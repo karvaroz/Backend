@@ -27,10 +27,7 @@ class ServerApp {
 	}
 
 	routers(): Array<express.Router> {
-		return [
-			new FileRouter().router,
-			new AccountRouter().router
-		];
+		return [new FileRouter().router, new AccountRouter().router];
 	}
 
 	async dbConnect() {
@@ -46,8 +43,10 @@ class ServerApp {
 		this.app.listen(this.port, () => {
 			console.log("Server listening on port " + this.port);
 		});
-		// new RabbitMQService().receiveMsgFromQueue("Downloader Service");
-		// new RabbitMQService().receiveMsgFromQueue("Uploader Service");
+		new RabbitMQService().sendMsgToQueue(
+			"Starts Service",
+			"Signal sent from Updloader"
+		);
 	}
 }
 

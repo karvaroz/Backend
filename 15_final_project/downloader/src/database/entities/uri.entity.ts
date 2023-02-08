@@ -1,12 +1,10 @@
-import { Column, ObjectIdColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export default class UriEntity {
-	@ObjectIdColumn()
-	_id!: string;
 
-	@PrimaryColumn()
-	uriId!: number;
+	@PrimaryGeneratedColumn("uuid")
+	uriId!: string;
 
 	@Column()
 	uriDirection!: string;
