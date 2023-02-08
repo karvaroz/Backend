@@ -1,36 +1,54 @@
-import amqp = require("amqplib/callback_api");
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
 
-amqp.connect(
-	{
-		protocol: "amqp",
-		hostname: "KARINA-LAPTOP",
-		port: 5672,
-		username: "admin",
-		password: "pass123",
-	},
-	function (error0, connection) {
-		if (error0) {
-			throw error0;
-		}
-		connection.createChannel(function (error1, channel) {
-			if (error1) {
-				throw error1;
-			}
+import { FileRouter } from "./api/routes/file.routes";
+import { AccountRouter } from "./api/routes/account.routes";
 
-			const queue = "Uploader Service";
-			const msg = "Msg sent to Uploader Service";
+import { AppDataSource } from "./database/DBsource";
 
-			channel.assertQueue(queue, {
-				durable: false,
-			});
-			channel.sendToQueue(queue, Buffer.from(msg));
+import { RabbitMQService } from "./services/rabbitmq.service";
 
-			console.log(" [x] Sent %s", msg);
-		});
+class ServerApp {
+	public app: express.Application = express();
+	private port: number = 3001;
 
-		setTimeout(function () {
-			connection.close();
-			process.exit(0);
-		}, 500);
+	constructor() {
+		this.app.use(express.json());
+		this.app.use(express.urlencoded({ extended: false }));
+
+		this.dbConnect();
+
+		this.app.use(morgan("dev"));
+		this.app.use(cors());
+
+		this.app.use("/api", this.routers());
+		this.listen();
 	}
-);
+
+	routers(): Array<express.Router> {
+		return [
+			new FileRouter().router,
+			new AccountRouter().router
+		];
+	}
+
+	async dbConnect() {
+		try {
+			console.log("DB Connection succeeded");
+			return await AppDataSource.initialize();
+		} catch (error) {
+			return console.log("Error: " + error);
+		}
+	}
+
+	public listen() {
+		this.app.listen(this.port, () => {
+			console.log("Server listening on port " + this.port);
+		});
+		// new RabbitMQService().receiveMsgFromQueue("Downloader Service");
+		// new RabbitMQService().receiveMsgFromQueue("Uploader Service");
+	}
+}
+
+new ServerApp();
