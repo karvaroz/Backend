@@ -15,29 +15,30 @@ export class AccountService {
 		return await this.accountRepository.getAllAccounts();
 	}
 
-	async getAccountById(id: number): Promise<AccountEntity | unknown> {
-		return await this.accountRepository.getAccountById(id);
+	async getAccountById(id: string) {
+		const account = await this.accountRepository.getAccountById(id);
+		if (account) {
+			return account;
+		}
 	}
 
-	async updateAccount(accountId: number, account: AccountEntity) {
-		const accountToUpdate = await this.accountRepository.getAccountById(
-			accountId
-		);
+	async updateAccount(id: string, account: AccountEntity) {
+		const accountToUpdate = await this.accountRepository.getAccountById(id);
 		if (accountToUpdate) {
 			const accountInfo: AccountEntity = {
 				_id: accountToUpdate._id,
 				accountId: accountToUpdate.accountId,
 				email: account.email,
-				clientId: account?.clientId,
-				clientSecret: account?.clientSecret,
-				redirectUri: account?.redirectUri,
-				googleDriveKey: account?.redirectUri,
+				clientId: account.clientId,
+				clientSecret: account.clientSecret,
+				redirectUri: account.redirectUri,
+				googleDriveKey: account.redirectUri,
 			};
-			return await this.accountRepository.updateAccount(accountId, accountInfo);
+			return await this.accountRepository.updateAccount(accountInfo);
 		}
 	}
 
-	async deleteAccount(accountId: number) {
-		return await this.accountRepository.deleteAccount(accountId);
+	async deleteAccount(id: string) {
+		return await this.accountRepository.deleteAccount(id);
 	}
 }

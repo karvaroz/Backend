@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { ObjectID } from "typeorm";
 import { AccountService } from "../../services/account.service";
 import { ResponseMsg } from "../../utils/response";
 
@@ -31,51 +30,50 @@ export class AccountController {
 			);
 			res.status(response.responseCode).json(response);
 		} catch (error) {
-			const response = new ResponseMsg(500, "Could not get accounts", error);
+			const response = new ResponseMsg(500, "Could not get accounts");
 			res.status(response.responseCode).json(response);
 		}
 	}
 
 	async getAccountById(req: Request, res: Response) {
-		try {
-			const account = await accountService.getAccountById(parseInt(req.params.id));
+		const account = await accountService.getAccountById(req.params.id);
+		if (account) {
 			const response = new ResponseMsg(
 				200,
 				"Got account by id successfully",
 				account
 			);
-			res.status(response.responseCode).json(response);
-		} catch (error) {
-			const response = new ResponseMsg(500, "Could not get account", error);
-			res.status(response.responseCode).json(response);
+			return res.status(response.responseCode).json(response);
 		}
+		const response = new ResponseMsg(500, "Could not get account");
+		return res.status(response.responseCode).json(response);
 	}
 
 	async updateAccount(req: Request, res: Response) {
-		try {
-			const account = await accountService.updateAccount(
-				parseInt(req.params.id),
+		const account = await accountService.getAccountById(req.params.id);
+		if (account) {
+			const accountToUpdate = await accountService.updateAccount(
+				account._id,
 				req.body
 			);
 			const response = new ResponseMsg(
 				200,
 				"Account updated successfully",
-				account
+				accountToUpdate
 			);
-			res.status(response.responseCode).json(response);
-		} catch (error) {
-			const response = new ResponseMsg(500, "Could not update account", error);
-			res.status(response.responseCode).json(response);
+			return res.status(response.responseCode).json(response);
 		}
+		const response = new ResponseMsg(500, "Could not update account");
+		return res.status(response.responseCode).json(response);
 	}
 
 	async deleteAccount(req: Request, res: Response) {
 		try {
-			await accountService.deleteAccount(parseInt(req.params.id));
+			await accountService.deleteAccount(req.params.id);
 			const response = new ResponseMsg(200, "Account deleted successfully");
 			res.status(response.responseCode).json(response);
 		} catch (error) {
-			const response = new ResponseMsg(500, "Could not delete account", error);
+			const response = new ResponseMsg(500, "Could not delete account");
 			res.status(response.responseCode).json(response);
 		}
 	}
