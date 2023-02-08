@@ -19,4 +19,5 @@ class ServerApp {
 	}
 }
 
+
 new ServerApp();
