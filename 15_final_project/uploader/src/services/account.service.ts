@@ -27,7 +27,6 @@ export class AccountService {
 		if (accountToUpdate) {
 			const accountInfo: AccountEntity = {
 				_id: accountToUpdate._id,
-				accountId: accountToUpdate.accountId,
 				email: account.email,
 				clientId: account.clientId,
 				clientSecret: account.clientSecret,

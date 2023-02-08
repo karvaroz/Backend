@@ -5,9 +5,6 @@ export default class AccountEntity {
 	@ObjectIdColumn()
 	_id!: string;
 
-	@Column({ nullable: false, unique: true })
-	accountId!: number;
-
 	@Column({ nullable: false })
 	email!: string;
 

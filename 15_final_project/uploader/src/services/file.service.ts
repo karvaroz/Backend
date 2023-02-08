@@ -17,11 +17,24 @@ export class FileService {
 	}
 
 	async getFileById(id: string) {
-		return await this.fileRepository.getFileById(id);
+		const file = await this.fileRepository.getFileById(id);
+		if (file) {
+			return file;
+		}
 	}
 
 	async updateFile(id: string, file: FileEntity) {
-		return await this.fileRepository.updateFile(id, file);
+		const fileToUpdate = await this.fileRepository.getFileById(id);
+		if (fileToUpdate) {
+			const fileInfo: FileEntity = {
+				_id: fileToUpdate._id,
+				name: file.name,
+				size: file.size,
+				driveId: file.driveId,
+				status: file.status,
+			};
+			return await this.fileRepository.updateFile(fileInfo);
+		}
 	}
 
 	async deleteFile(id: string) {
